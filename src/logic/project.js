@@ -1,7 +1,9 @@
+import { createList } from "../storage/storage";
+
 export default createProject = () => {
   const name = "";
   const description = "";
-  let tasks = [];
+  let tasks = createList();
 
   const setName = (projectName) => {
     name = projectName;
@@ -12,7 +14,7 @@ export default createProject = () => {
   };
 
   const addTask = (task) => {
-    tasks.push(task);
+    tasks.append(task);
   };
 
   const removeTask = (taskTitle) => {
