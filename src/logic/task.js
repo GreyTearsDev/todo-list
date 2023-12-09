@@ -1,5 +1,5 @@
 import { createList } from "../storage/storage";
-import { addDays } from "date-fns";
+import { addDays, setDate } from "date-fns";
 
 export default createTask = () => {
   let title = "";
@@ -33,7 +33,7 @@ export default createTask = () => {
   };
 
   const setDueDate = (projDate) => {
-    dueDate = projDate;
+    dueDate = setDate;
   };
 
   const getDueDate = () => {
