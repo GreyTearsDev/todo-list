@@ -17,6 +17,10 @@ export default createProject = () => {
     tasks.append(task);
   };
 
+  const removeTask = (task) => {
+    tasks.remove(task);
+  };
+
   return {
     name,
     description,
