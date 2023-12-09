@@ -47,6 +47,7 @@ export default createTask = () => {
     setTitle,
     getPriority,
     setDueDate,
+    setPriority,
     getTitle,
     getPriority,
     getDueDate,
