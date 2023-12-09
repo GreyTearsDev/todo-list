@@ -5,7 +5,16 @@ export default createTask = () => {
   let title = "";
   let priority = "";
   let dueDate = "";
+  let done = false;
   let checkList = createList();
+
+  const getTaskStatus = () => {
+    return done;
+  };
+
+  const switchTaskStatus = () => {
+    done = !done;
+  };
 
   const setTitle = (projTitle) => {
     title = projTitle;
@@ -54,5 +63,7 @@ export default createTask = () => {
     addCheckListItem,
     removeCheckListItem,
     getCheckList,
+    getTaskStatus,
+    switchTaskStatus,
   };
 };
