@@ -25,5 +25,7 @@ export default createProject = () => {
     name,
     description,
     tasks,
+    addTask,
+    removeTask,
   };
 };
