@@ -14,8 +14,25 @@ const createList = function () {
     return -1;
   };
 
+  const findStrict = (element) => {
+    for (let i = 0; i < dataStore.length; ++i) {
+      if (dataStore[i] === element) return i;
+    }
+    return -1;
+  };
+
   const remove = (element) => {
     let foundAt = this.find(element);
+    if (foundAt > -1) {
+      dataStore.splice(foundAt, 1);
+      --listSize;
+      return true;
+    }
+    return false;
+  };
+
+  const removeStrict = (element) => {
+    let foundAt = this.findStrict(element);
     if (foundAt > -1) {
       dataStore.splice(foundAt, 1);
       --listSize;
@@ -90,7 +107,9 @@ const createList = function () {
   return {
     append,
     find,
+    findStrict,
     remove,
+    removeStrict,
     length,
     toString,
     insert,

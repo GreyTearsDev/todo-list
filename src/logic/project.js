@@ -17,14 +17,6 @@ export default createProject = () => {
     tasks.append(task);
   };
 
-  const removeTask = (taskTitle) => {
-    for (let task of tasks) {
-      if (task.title == taskTitle) {
-        //remove task
-      }
-    }
-  };
-
   return {
     name,
     description,
