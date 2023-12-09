@@ -9,8 +9,16 @@ export default createProject = () => {
     name = projectName;
   };
 
+  const getName = () => {
+    return name;
+  };
+
   const setDescription = (projectDescription) => {
     description = projectDescription;
+  };
+
+  const getDescription = () => {
+    return description;
   };
 
   const addTask = (task) => {
@@ -21,11 +29,17 @@ export default createProject = () => {
     tasks.remove(task);
   };
 
+  const getTasks = () => {
+    return tasks;
+  };
+
   return {
-    name,
-    description,
-    tasks,
+    setName,
+    setDescription,
+    getName,
+    getDescription,
     addTask,
     removeTask,
+    getTasks,
   };
 };
