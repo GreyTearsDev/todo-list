@@ -46,6 +46,7 @@ const createMainLayoutElements = () => {
   const sideBar = createSideBarElement();
   const header = createHeaderElement();
 
+  body.className = "main-div";
   body.appendChild(main);
   body.appendChild(sideBar);
   body.appendChild(header);

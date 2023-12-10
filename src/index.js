@@ -6,6 +6,5 @@ import {
 import "./style.css";
 
 (function () {
-  console.log("");
   const mainBody = createMainLayoutElements();
 })();
