@@ -1,5 +1,3 @@
-import { createTask } from "../logic/task";
-
 const createTaskElement = (task) => {
   const body = document.createElement("div");
   const btnDone = document.createElement("button");

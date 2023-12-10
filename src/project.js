@@ -1,4 +1,4 @@
-import { createList } from "../storage/storage";
+import { createList } from "./storage";
 import { dateManager } from "./dates";
 
 export default createProject = () => {

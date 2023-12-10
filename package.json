@@ -4,21 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "GreyTearsDev",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cli": "^1.0.1",
-    "css-loader": "^6.8.1",
-    "style-loader": "^3.3.3",
-    "watch": "^0.13.0",
+    "html-webpack-plugin": "^5.5.4",
     "webpack": "^5.89.0",
-    "webpack-merge": "^5.10.0"
-  },
-  "dependencies": {
-    "date-fns": "^2.30.0",
-    "html-webpack-plugin": "^5.5.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

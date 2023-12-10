@@ -1,10 +1,10 @@
-import {
-  createMainLayoutElements,
-  createProjectElement,
-  createTaskElement,
-} from "./ui/create-html-elements";
+// import {
+//   createMainLayoutElements,
+//   createProjectElement,
+//   createTaskElement,
+// } from "./create-html-elements";
 
 (function () {
-  console.log("fkl");
+  console.log("");
   //   const mainBody = createMainLayoutElements();
 })();
