@@ -22,7 +22,7 @@ const createList = function () {
   };
 
   const remove = (element) => {
-    let foundAt = this.find(element);
+    let foundAt = find(element);
     if (foundAt > -1) {
       dataStore.splice(foundAt, 1);
       --listSize;
@@ -32,7 +32,7 @@ const createList = function () {
   };
 
   const removeStrict = (element) => {
-    let foundAt = this.findStrict(element);
+    let foundAt = findStrict(element);
     if (foundAt > -1) {
       dataStore.splice(foundAt, 1);
       --listSize;
@@ -50,7 +50,7 @@ const createList = function () {
   };
 
   const insert = (element, after) => {
-    const insertPosition = this.find(after);
+    const insertPosition = find(after);
 
     if (insertPosition > -1) {
       dataStore.splice(insertPosition + 1, 0, element);
@@ -88,7 +88,7 @@ const createList = function () {
 
   const next = () => {
     if (position < listSize - 1) {
-      position++;
+      position += ++position;
     }
   };
 

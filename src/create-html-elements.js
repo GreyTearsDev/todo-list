@@ -35,7 +35,7 @@ const createProjectElement = (project) => {
 
   deleteBtn.textContent = "x";
   deleteBtn.id = "delete-project";
-  title.textContent = project.getTitle();
+  title.textContent = project.getName();
   description.textContent = project.getDescription();
   dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
 
@@ -84,6 +84,7 @@ const createSideBarElement = (projects) => {
   const btnCreateProject = document.createElement("button");
   const projectsContainer = document.createElement("div");
 
+  projectsContainer.id = "project-container";
   btnCreateProject.textContent = "New Project";
   btnCreateProject.id = "btn-create-project";
   // projects.forEach((project) =>
@@ -111,7 +112,7 @@ const createMainElement = (tasks) => {
 const newProjectForm = () => {
   const body = document.createElement("div");
   const projName = document.createElement("input");
-  const projDescription = document.createElement("input");
+  const projDescription = document.createElement("textarea");
   const submit = document.createElement("button");
   const cancelBtn = document.createElement("button");
 
@@ -124,7 +125,6 @@ const newProjectForm = () => {
   projName.placeholder = "Project name: ";
   projDescription.placeholder = "Description: ";
 
-  projDescription.type = "textarea";
   projDescription.maxLength = 80;
 
   body.appendChild(projName);
@@ -138,7 +138,7 @@ const newProjectForm = () => {
 const newTaskForm = () => {
   const body = document.createElement("div");
   const taskTitle = document.createElement("input");
-  const taskDescription = document.createElement("input");
+  const taskDescription = document.createElement("textarea");
   const dueDate = document.createElement("label");
   const date = document.createElement("input");
   const submit = document.createElement("button");
@@ -155,7 +155,6 @@ const newTaskForm = () => {
   taskTitle.placeholder = "Title: ";
   taskDescription.placeholder = "Description: ";
 
-  taskDescription.type = "textarea";
   taskDescription.maxLength = 40;
 
   body.appendChild(taskTitle);

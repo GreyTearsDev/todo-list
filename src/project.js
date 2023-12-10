@@ -2,8 +2,8 @@ import { createList } from "./storage";
 import { dateManager } from "./dates";
 
 const createProject = () => {
-  const name = "";
-  const description = "";
+  let name = "";
+  let description = "";
   const projectDates = dateManager();
   let tasks = createList();
 
