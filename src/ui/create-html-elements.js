@@ -1,16 +1,6 @@
 import { createTask } from "../logic/task";
 
-const createTaskElement = (title, priority, dueDate) => {
-  const task = createTask();
-  task.setTitle(title);
-  task.setPriority(priority);
-  task.taskDates.setDueDate(dueDate);
-
-  const element = createTaskBodyElement(task);
-  return element;
-};
-
-const createTaskBodyElement = (task) => {
+const createTaskElement = (task) => {
   const body = document.createElement("div");
   const btnDone = document.createElement("button");
   const btnDelete = document.createElement("button");
@@ -35,6 +25,23 @@ const createTaskBodyElement = (task) => {
   return body;
 };
 
+const createProjectElement = (project) => {
+  const body = document.createElement("div");
+  const title = document.createElement("h4");
+  const description = document.createElement("p");
+  const dateInfo = document.createElement("p");
+
+  title.textContent = project.getTitle();
+  description.textContent = project.getDescription();
+  dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
+
+  body.appendChild(title);
+  body.appendChild(description);
+  body.appendChild(dateInfo);
+
+  return body;
+};
+
 const createMainLayoutElements = () => {
   const body = document.createElement("div");
   const main = createMainElement();
@@ -52,8 +59,10 @@ const createMainLayoutElements = () => {
 const createHeaderElement = () => {
   const header = document.createElement("header");
   const appName = document.createElement("h2");
+
   appName.textContent = "ToBeDone";
   header.appendChild(appName);
+
   return header;
 };
 
@@ -63,7 +72,9 @@ const createSideBarElement = (projects) => {
   const projectsContainer = document.createElement("div");
 
   btnCreateProject.textContent = "New Project";
-  projects.forEach((project) => projectsContainer.appendChild(project));
+  projects.forEach((project) =>
+    projectsContainer.appendChild(createProjectElement(project))
+  );
   sideBar.appendChild(btnCreateProject);
   sideBar.appendChild(projectsContainer);
 
@@ -78,4 +89,4 @@ const createMainElement = (tasks) => {
   return main;
 };
 
-export { createTaskElement };
+export { createTaskElement, createProjectElement, createMainLayoutElements };
