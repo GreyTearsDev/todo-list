@@ -6,13 +6,14 @@ import {
   newTaskForm,
 } from "./create-html-elements";
 import "./style.css";
+import { createProject } from "./project";
+import { projects } from "./storage";
 
 (function () {
   const mainBody = createMainLayoutElements();
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
-  const modalContainer = document.querySelector("#general-modal");
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
@@ -30,6 +31,17 @@ import "./style.css";
 
     modal.style.display = "block";
 
+    submitProj.addEventListener("click", function () {
+      const projName = form.firstChild.value;
+      const projDescription = form.lastChild.value;
+      const project = createProject();
+
+      project.setName = projName;
+      project.setDescription = projDescription;
+
+      projects.append(project);
+      console.log(projects.toString());
+    });
     cancelBtnProj.addEventListener("click", closeModal);
   });
 
@@ -47,7 +59,11 @@ import "./style.css";
   });
 
   function closeModal() {
+    const modalContainer = document.querySelector("#general-modal");
+
     modal.style.display = "none";
     modalContainer.removeChild(modalContainer.firstChild);
   }
+
+  function saveProject(form) {}
 })();

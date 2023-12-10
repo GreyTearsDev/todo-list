@@ -1,7 +1,7 @@
 import { createList } from "./storage";
 import { dateManager } from "./dates";
 
-export default createProject = () => {
+const createProject = () => {
   const name = "";
   const description = "";
   const projectDates = dateManager();
@@ -46,3 +46,5 @@ export default createProject = () => {
     projectDates,
   };
 };
+
+export { createProject };
