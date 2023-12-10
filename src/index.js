@@ -18,6 +18,12 @@ import "./style.css";
   const modal = document.getElementById("general-modal");
   const cancelBtn = document.querySelector(".btn-cancel");
 
+  window.addEventListener("click", function () {
+    if (this.event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+
   projBtn.addEventListener("click", function () {
     const form = newProjectForm();
     modal.appendChild(form);
@@ -28,5 +34,10 @@ import "./style.css";
     const form = newTaskForm();
     modal.appendChild(form);
     modal.style.display = "block";
+  });
+
+  cancelBtn.addEventListener("click", function () {
+    console.log("hiii");
+    modal.style.display = "none";
   });
 })();
