@@ -5,9 +5,10 @@ module.exports = {
   entry: {
     app: "./src/index.js",
   },
+  watch: true,
   plugins: [
     new HtmlWebpackPlugin({
-      titile: "Production",
+      title: "Production",
     }),
   ],
   output: {
@@ -15,7 +16,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  modules: {
+  module: {
     rules: [
       {
         test: /\.css$/i,
