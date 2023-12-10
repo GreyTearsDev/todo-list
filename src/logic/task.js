@@ -1,11 +1,11 @@
 import { createList } from "../storage/storage";
-import { setTaskDate } from "./dates";
+import { dateManager } from "./dates";
 
 export default createTask = () => {
   let title = "";
   let priority = "";
-  let dueDate = "";
   let done = false;
+  const taskDates = dateManager();
   let checkList = createList();
 
   const getTaskStatus = () => {
@@ -32,14 +32,6 @@ export default createTask = () => {
     return priority;
   };
 
-  const setDueDate = (projDate) => {
-    dueDate = setTaskDate(projDate);
-  };
-
-  const getDueDate = () => {
-    return dueDate;
-  };
-
   const addCheckListItem = (item) => {
     checkList.append(item);
   };
@@ -55,11 +47,9 @@ export default createTask = () => {
   return {
     setTitle,
     getPriority,
-    setDueDate,
     setPriority,
     getTitle,
     getPriority,
-    getDueDate,
     addCheckListItem,
     removeCheckListItem,
     getCheckList,
