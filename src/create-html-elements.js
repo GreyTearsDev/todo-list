@@ -7,6 +7,9 @@ const createTaskElement = (task) => {
   const dueDateContainer = document.createElement("div");
   const dueDateInfo = document.createElement("p");
 
+  btnDelete.textContent = "x";
+  btnDelete.id = "delete-task";
+
   dueDateInfo.textContent = task.taskDates.getDueDate();
   dueDateContainer.appendChild(dueDateInfo);
 
@@ -28,7 +31,10 @@ const createProjectElement = (project) => {
   const title = document.createElement("h4");
   const description = document.createElement("p");
   const dateInfo = document.createElement("p");
+  const deleteBtn = document.createElement("button");
 
+  deleteBtn.textContent = "x";
+  deleteBtn.id = "delete-project";
   title.textContent = project.getTitle();
   description.textContent = project.getDescription();
   dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
@@ -103,6 +109,7 @@ const newProjectForm = () => {
   const submit = document.createElement("button");
 
   submit.textContent = "Create";
+  submit.id = "submit";
 
   projName.placeholder = "Project name: ";
   projDescription.placeholder = "Description: ";
