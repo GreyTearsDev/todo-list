@@ -49,7 +49,7 @@ const createMainLayoutElements = () => {
   body.appendChild(main);
   body.appendChild(sideBar);
   body.appendChild(header);
-  document.appendChild(body);
+  document.body.appendChild(body);
 
   return body;
 };
@@ -70,9 +70,9 @@ const createSideBarElement = (projects) => {
   const projectsContainer = document.createElement("div");
 
   btnCreateProject.textContent = "New Project";
-  projects.forEach((project) =>
-    projectsContainer.appendChild(createProjectElement(project))
-  );
+  // projects.forEach((project) =>
+  //   projectsContainer.appendChild(createProjectElement(project))
+  // );
   sideBar.appendChild(btnCreateProject);
   sideBar.appendChild(projectsContainer);
 
@@ -82,8 +82,11 @@ const createSideBarElement = (projects) => {
 const createMainElement = (tasks) => {
   const main = document.createElement("main");
   const tasksContainer = document.createElement("div");
+  const btnNewTask = document.createElement("button");
 
-  tasks.forEach((task) => tasksContainer.appendChild(task));
+  // tasks.forEach((task) => tasksContainer.appendChild(task));
+  btnNewTask.textContent = "Add New Task";
+  tasksContainer.appendChild(btnNewTask);
   main.appendChild(tasksContainer);
   return main;
 };
