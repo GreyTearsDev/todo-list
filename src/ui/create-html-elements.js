@@ -85,6 +85,7 @@ const createMainElement = (tasks) => {
   const main = document.createElement("main");
   const tasksContainer = document.createElement("div");
 
+  tasks.forEach((task) => tasksContainer.appendChild(task));
   main.appendChild(tasksContainer);
   return main;
 };
