@@ -4,6 +4,7 @@ import { dateManager } from "./dates";
 const createTask = () => {
   let title = "";
   let priority = "";
+  let description = "";
   let done = false;
   const taskDates = dateManager();
 
@@ -21,6 +22,14 @@ const createTask = () => {
 
   const getTitle = () => {
     return title;
+  };
+
+  const getDescription = () => {
+    return description;
+  };
+
+  const setDescription = (desc) => {
+    description = desc;
   };
 
   const setPriority = (projPriority) => {
@@ -43,6 +52,8 @@ const createTask = () => {
     setTitle,
     getPriority,
     setPriority,
+    setDescription,
+    getDescription,
     getTitle,
     getPriority,
     addCheckListItem,
