@@ -3,6 +3,7 @@ import {
   createProjectElement,
   createTaskElement,
   newProjectForm,
+  newTaskForm,
 } from "./create-html-elements";
 import "./style.css";
 
@@ -15,9 +16,16 @@ import "./style.css";
   const delProjBtn = document.querySelector("#delete-project");
   const delTaskBtn = document.querySelector("#delete-task");
   const modal = document.getElementById("general-modal");
+  const cancelBtn = document.querySelector(".btn-cancel");
 
   projBtn.addEventListener("click", function () {
     const form = newProjectForm();
+    modal.appendChild(form);
+    modal.style.display = "block";
+  });
+
+  taskBtn.addEventListener("click", function () {
+    const form = newTaskForm();
     modal.appendChild(form);
     modal.style.display = "block";
   });

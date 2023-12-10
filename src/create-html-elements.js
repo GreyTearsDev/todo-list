@@ -113,6 +113,10 @@ const newProjectForm = () => {
   const projName = document.createElement("input");
   const projDescription = document.createElement("input");
   const submit = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "btn-cancel";
 
   submit.textContent = "Create";
   submit.id = "submit-form";
@@ -126,6 +130,7 @@ const newProjectForm = () => {
   body.appendChild(projName);
   body.appendChild(projDescription);
   body.appendChild(submit);
+  body.appendChild(cancelBtn);
 
   return body;
 };
@@ -137,6 +142,10 @@ const newTaskForm = () => {
   const dueDate = document.createElement("label");
   const date = document.createElement("input");
   const submit = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "btn-cancel";
 
   date.type = "date";
 
@@ -154,6 +163,7 @@ const newTaskForm = () => {
   body.appendChild(dueDate);
   body.appendChild(date);
   body.appendChild(submit);
+  body.appendChild(cancelBtn);
 
   return body;
 };
