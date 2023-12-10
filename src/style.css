@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --priority-high: #ffa0b7;
+  --priority-mid: #ffe5c2;
+  --priority-low: #82ff94;
+
+  --secondary-color: #c29cff;
+  --accent-color: #8fd4ff;
+  --main-color: #eff9fe;
+}
