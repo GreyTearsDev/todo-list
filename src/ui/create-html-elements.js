@@ -34,3 +34,19 @@ const createTaskBodyElement = (task) => {
 
   return body;
 };
+
+const createMainLayoutElements = (tasks) => {
+  const body = document.createElement("div");
+  const main = document.createElement("main");
+  const sideBar = document.createElement("side");
+  const header = document.createElement("header");
+
+  body.appendChild(main);
+  body.appendChild(sideBar);
+  body.appendChild(header);
+  document.appendChild(body);
+
+  return { main, sideBar, header };
+};
+
+export { createTaskElement };
