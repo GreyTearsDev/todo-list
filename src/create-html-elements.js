@@ -53,7 +53,7 @@ const createMainLayoutElements = () => {
   body.appendChild(header);
   document.appendChild(body);
 
-  return { main, sideBar, header };
+  return body;
 };
 
 const createHeaderElement = () => {

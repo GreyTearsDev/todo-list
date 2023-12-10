@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "start": "webpack --open --config webpack.dev.js",
-    "watch": "webpack --watch"
+    "start": "webpack"
   },
   "keywords": [],
   "author": "GreyTearsDev",
