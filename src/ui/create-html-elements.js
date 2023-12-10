@@ -35,11 +35,11 @@ const createTaskBodyElement = (task) => {
   return body;
 };
 
-const createMainLayoutElements = (tasks) => {
+const createMainLayoutElements = () => {
   const body = document.createElement("div");
-  const main = document.createElement("main");
-  const sideBar = document.createElement("side");
-  const header = document.createElement("header");
+  const main = createMainElement();
+  const sideBar = createSideBarElement();
+  const header = createHeaderElement();
 
   body.appendChild(main);
   body.appendChild(sideBar);
@@ -47,6 +47,35 @@ const createMainLayoutElements = (tasks) => {
   document.appendChild(body);
 
   return { main, sideBar, header };
+};
+
+const createHeaderElement = () => {
+  const header = document.createElement("header");
+  const appName = document.createElement("h2");
+  appName.textContent = "ToBeDone";
+  header.appendChild(appName);
+  return header;
+};
+
+const createSideBarElement = (projects) => {
+  const sideBar = document.createElement("side");
+  const btnCreateProject = document.createElement("button");
+  const projectsContainer = document.createElement("div");
+
+  btnCreateProject.textContent = "New Project";
+  projects.forEach((project) => projectsContainer.appendChild(project));
+  sideBar.appendChild(btnCreateProject);
+  sideBar.appendChild(projectsContainer);
+
+  return sideBar;
+};
+
+const createMainElement = (tasks) => {
+  const main = document.createElement("main");
+  const tasksContainer = document.createElement("div");
+
+  main.appendChild(tasksContainer);
+  return main;
 };
 
 export { createTaskElement };
