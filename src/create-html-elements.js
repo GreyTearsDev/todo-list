@@ -51,6 +51,7 @@ const createMainLayoutElements = () => {
   const main = createMainElement();
   const sideBar = createSideBarElement();
   const header = createHeaderElement();
+  createModal();
 
   body.className = "main-div";
   body.appendChild(main);
@@ -59,6 +60,13 @@ const createMainLayoutElements = () => {
   document.body.appendChild(body);
 
   return body;
+};
+
+const createModal = () => {
+  const modal = document.createElement("div");
+  modal.id = "general-modal";
+  modal.classList = "modal";
+  document.body.appendChild(modal);
 };
 
 const createHeaderElement = () => {
@@ -104,27 +112,56 @@ const newProjectForm = () => {
   const body = document.createElement("div");
   const projName = document.createElement("input");
   const projDescription = document.createElement("input");
-  const date = document.createElement("label");
-  const dueDate = document.createElement("input");
   const submit = document.createElement("button");
 
   submit.textContent = "Create";
-  submit.id = "submit";
+  submit.id = "submit-form";
 
   projName.placeholder = "Project name: ";
   projDescription.placeholder = "Description: ";
-  date.textContent = "Due date: ";
 
   projDescription.type = "textarea";
-  projDescription.maxLength = 40;
-
-  dueDate.type = "date";
+  projDescription.maxLength = 80;
 
   body.appendChild(projName);
   body.appendChild(projDescription);
-  body.appendChild(dueDate);
   body.appendChild(submit);
 
   return body;
 };
-export { createTaskElement, createProjectElement, createMainLayoutElements };
+
+const newTaskForm = () => {
+  const body = document.createElement("div");
+  const taskTitle = document.createElement("input");
+  const taskDescription = document.createElement("input");
+  const dueDate = document.createElement("label");
+  const date = document.createElement("input");
+  const submit = document.createElement("button");
+
+  date.type = "date";
+
+  submit.textContent = "Create";
+  submit.id = "submit-task";
+
+  taskTitle.placeholder = "Title: ";
+  taskDescription.placeholder = "Description: ";
+
+  taskDescription.type = "textarea";
+  taskDescription.maxLength = 40;
+
+  body.appendChild(taskTitle);
+  body.appendChild(taskDescription);
+  body.appendChild(dueDate);
+  body.appendChild(date);
+  body.appendChild(submit);
+
+  return body;
+};
+
+export {
+  createTaskElement,
+  createProjectElement,
+  createMainLayoutElements,
+  newTaskForm,
+  newProjectForm,
+};

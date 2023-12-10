@@ -2,17 +2,23 @@ import {
   createMainLayoutElements,
   createProjectElement,
   createTaskElement,
+  newProjectForm,
 } from "./create-html-elements";
 import "./style.css";
 
 (function () {
   const mainBody = createMainLayoutElements();
-})();
-
-(function () {
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
-  const submitBtn = document.querySelector("#submit");
+  const submitProj = document.querySelector("#submit-form");
+  const submitTask = document.querySelector("#submit-task");
   const delProjBtn = document.querySelector("#delete-project");
-  const deltaskBtn = document.querySelector("#delete-task");
+  const delTaskBtn = document.querySelector("#delete-task");
+  const modal = document.getElementById("general-modal");
+
+  projBtn.addEventListener("click", function () {
+    const form = newProjectForm();
+    modal.appendChild(form);
+    modal.style.display = "block";
+  });
 })();
