@@ -94,4 +94,30 @@ const createMainElement = (tasks) => {
   return main;
 };
 
+const newProjectForm = () => {
+  const body = document.createElement("div");
+  const projName = document.createElement("input");
+  const projDescription = document.createElement("input");
+  const date = document.createElement("label");
+  const dueDate = document.createElement("input");
+  const submit = document.createElement("button");
+
+  submit.textContent = "Create";
+
+  projName.placeholder = "Project name: ";
+  projDescription.placeholder = "Description: ";
+  date.textContent = "Due date: ";
+
+  projDescription.type = "textarea";
+  projDescription.maxLength = 40;
+
+  dueDate.type = "date";
+
+  body.appendChild(projName);
+  body.appendChild(projDescription);
+  body.appendChild(dueDate);
+  body.appendChild(submit);
+
+  return body;
+};
 export { createTaskElement, createProjectElement, createMainLayoutElements };
