@@ -116,7 +116,7 @@ const newProjectForm = () => {
   const cancelBtn = document.createElement("button");
 
   cancelBtn.textContent = "Cancel";
-  cancelBtn.className = "btn-cancel";
+  cancelBtn.id = "btn-cancel-proj";
 
   submit.textContent = "Create";
   submit.id = "submit-form";
@@ -145,7 +145,7 @@ const newTaskForm = () => {
   const cancelBtn = document.createElement("button");
 
   cancelBtn.textContent = "Cancel";
-  cancelBtn.className = "btn-cancel";
+  cancelBtn.id = "btn-cancel-task";
 
   date.type = "date";
 
