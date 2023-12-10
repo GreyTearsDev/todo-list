@@ -1,6 +1,6 @@
 import { format, differenceInDays } from "date-fns";
 
-export default dateManager = () => {
+const dateManager = () => {
   const creationDate = format(new Date(), "MMMM d, yyyy");
   let dueDate = "";
 
@@ -22,3 +22,5 @@ export default dateManager = () => {
 
   return { getDueDate, getCreationDate, getTimeDifference, setDueDate };
 };
+
+export { dateManager };

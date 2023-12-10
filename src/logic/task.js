@@ -1,12 +1,11 @@
 import { createList } from "../storage/storage";
 import { dateManager } from "./dates";
 
-export default createTask = () => {
+const createTask = () => {
   let title = "";
   let priority = "";
   let done = false;
   const taskDates = dateManager();
-  let checkList = createList();
 
   const getTaskStatus = () => {
     return done;
@@ -40,10 +39,6 @@ export default createTask = () => {
     checkList.remove(item);
   };
 
-  const getCheckList = () => {
-    return checkList;
-  };
-
   return {
     setTitle,
     getPriority,
@@ -52,8 +47,10 @@ export default createTask = () => {
     getPriority,
     addCheckListItem,
     removeCheckListItem,
-    getCheckList,
     getTaskStatus,
     switchTaskStatus,
+    taskDates,
   };
 };
+
+export { createTask };
