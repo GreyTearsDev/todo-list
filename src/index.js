@@ -17,8 +17,6 @@ import { projects } from "./storage";
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
 
-  console.log("oi");
-
   function renderProjects() {
     for (
       projects.front();
@@ -49,6 +47,7 @@ import { projects } from "./storage";
     const submitProj = document.querySelector("#submit-form");
 
     submitProj.addEventListener("click", function () {
+      projContainer.innerHTML = "";
       const projName = form.firstChild.value;
       const projDescription = form.children.item(1).value;
       const project = createProject();

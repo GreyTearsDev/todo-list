@@ -20,8 +20,8 @@ const createTaskElement = (task) => {
   body.appendChild(title);
   body.appendChild(description);
   body.appendChild(btnDone);
-  body.appendChild(btnDelete);
   body.appendChild(dueDateContainer);
+  body.appendChild(btnDelete);
 
   return body;
 };
@@ -42,6 +42,7 @@ const createProjectElement = (project) => {
   body.appendChild(title);
   body.appendChild(description);
   body.appendChild(dateInfo);
+  body.appendChild(deleteBtn);
 
   return body;
 };

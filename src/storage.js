@@ -1,7 +1,7 @@
 const createList = function () {
+  let dataStore = [];
   let listSize = 0;
   let position = 0;
-  let dataStore = [];
 
   const append = (element) => {
     dataStore[listSize++] = element;
@@ -87,9 +87,12 @@ const createList = function () {
   };
 
   const next = () => {
-    if (position < listSize - 1) {
-      position += ++position;
-    }
+    ++position;
+    // if (position < listSize - 1) {
+    //   ++position;
+
+    //   console.log("hiii");
+    // }
   };
 
   const currPos = () => {
