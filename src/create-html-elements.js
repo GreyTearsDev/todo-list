@@ -71,6 +71,7 @@ const createSideBarElement = (projects) => {
   const projectsContainer = document.createElement("div");
 
   btnCreateProject.textContent = "New Project";
+  btnCreateProject.id = "btn-create-project";
   // projects.forEach((project) =>
   //   projectsContainer.appendChild(createProjectElement(project))
   // );
@@ -87,6 +88,7 @@ const createMainElement = (tasks) => {
 
   // tasks.forEach((task) => tasksContainer.appendChild(task));
   btnNewTask.textContent = "Add New Task";
+  btnNewTask.id = "btn-new-task";
   tasksContainer.appendChild(btnNewTask);
   main.appendChild(tasksContainer);
   return main;
