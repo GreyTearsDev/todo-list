@@ -16,11 +16,13 @@ import "./style.css";
   const delProjBtn = document.querySelector("#delete-project");
   const delTaskBtn = document.querySelector("#delete-task");
   const modal = document.getElementById("general-modal");
+  const modalContainer = document.querySelector("#general-modal");
   const cancelBtn = document.querySelector(".btn-cancel");
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
       modal.style.display = "none";
+      modalContainer.removeChild(modalContainer.firstChild);
     }
   });
 
@@ -28,6 +30,7 @@ import "./style.css";
     const form = newProjectForm();
     modal.appendChild(form);
     modal.style.display = "block";
+    console.log(cancelBtn);
   });
 
   taskBtn.addEventListener("click", function () {
