@@ -13,6 +13,7 @@ import { projects } from "./storage";
 (function () {
   const mainBody = createMainLayoutElements();
   const main = document.body.querySelector("main");
+  const taskContainer = document.getElementById("taskContainer");
   const projContainer = document.querySelector("#project-container");
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
@@ -91,9 +92,15 @@ import { projects } from "./storage";
   }
 
   function renderTasks(children, child) {
+    taskContainer.innerHTML = "";
     for (const [index, child] of children.entries()) {
       projects.moveTo(index);
-      console.log(projects.getElement().getName());
+      let project = projects.getElement().getName();
+
+      project.getTasks.forEach((task) => {
+        let taskElement = createTaskElement(task);
+        taskContainer.appendChild(taskElement);
+      });
     }
   }
 

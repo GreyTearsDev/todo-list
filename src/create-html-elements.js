@@ -100,14 +100,15 @@ const createSideBarElement = (projects) => {
 
 const createMainElement = (tasks) => {
   const main = document.createElement("main");
-  const tasksContainer = document.createElement("div");
+  const taskContainer = document.createElement("div");
   const btnNewTask = document.createElement("button");
 
   // tasks.forEach((task) => tasksContainer.appendChild(task));
   btnNewTask.textContent = "Add New Task";
   btnNewTask.id = "btn-new-task";
-  tasksContainer.appendChild(btnNewTask);
-  main.appendChild(tasksContainer);
+  taskContainer.id = "task-container";
+  taskContainer.appendChild(btnNewTask);
+  main.appendChild(taskContainer);
   return main;
 };
 
