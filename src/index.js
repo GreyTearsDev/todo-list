@@ -18,18 +18,6 @@ import { projects } from "./storage";
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
 
-  function renderProjects() {
-    for (
-      projects.front();
-      projects.currPos() < projects.length();
-      projects.next()
-    ) {
-      const project = projects.getElement();
-      const proj = createProjectElement(project);
-      projContainer.appendChild(proj);
-    }
-  }
-
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
       closeModal();
@@ -58,12 +46,7 @@ import { projects } from "./storage";
       closeModal();
       renderProjects(project);
 
-      let children = document.querySelectorAll(".project");
-      [...children].forEach((child) =>
-        child.addEventListener("click", function () {
-          console.log(child);
-        })
-      );
+      addEventListenerToProjects();
     });
 
     cancelBtnProj.addEventListener("click", closeModal);
@@ -98,7 +81,33 @@ import { projects } from "./storage";
     modalContainer.removeChild(modalContainer.firstChild);
   }
 
+  function addEventListenerToProjects() {
+    let [...children] = document.querySelectorAll(".project");
+    children.forEach((child) =>
+      child.addEventListener("click", function () {
+        renderTasks(children, child);
+      })
+    );
+  }
+
+  function renderTasks(children, child) {
+    for (const [index] of children.entries()) {
+      console.log(index);
+    }
+  }
+
   function saveProject(form) {}
+  function renderProjects() {
+    for (
+      projects.front();
+      projects.currPos() < projects.length();
+      projects.next()
+    ) {
+      const project = projects.getElement();
+      const proj = createProjectElement(project);
+      projContainer.appendChild(proj);
+    }
+  }
 })();
 
 //todo
