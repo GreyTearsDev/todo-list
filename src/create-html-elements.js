@@ -39,6 +39,7 @@ const createProjectElement = (project) => {
   description.textContent = project.getDescription();
   dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
 
+  body.className = "project";
   body.appendChild(title);
   body.appendChild(description);
   body.appendChild(dateInfo);

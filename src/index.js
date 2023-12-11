@@ -12,6 +12,7 @@ import { projects } from "./storage";
 
 (function () {
   const mainBody = createMainLayoutElements();
+  const main = document.body.querySelector("main");
   const projContainer = document.querySelector("#project-container");
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
@@ -23,8 +24,6 @@ import { projects } from "./storage";
       projects.currPos() < projects.length();
       projects.next()
     ) {
-      console.log(projects.currPos());
-      console.log(projects.length());
       const project = projects.getElement();
       const proj = createProjectElement(project);
       projContainer.appendChild(proj);
@@ -52,13 +51,19 @@ import { projects } from "./storage";
       const projDescription = form.children.item(1).value;
       const project = createProject();
 
-      console.log(projDescription);
-
       project.setName(projName);
       project.setDescription(projDescription);
       projects.append(project);
+
       closeModal();
       renderProjects(project);
+
+      let children = document.querySelectorAll(".project");
+      [...children].forEach((child) =>
+        child.addEventListener("click", function () {
+          console.log(child);
+        })
+      );
     });
 
     cancelBtnProj.addEventListener("click", closeModal);
@@ -74,14 +79,13 @@ import { projects } from "./storage";
 
     modal.style.display = "block";
 
-    submitProj.addEventListener("click", function () {
+    submitTask.addEventListener("click", function () {
       const taskName = form.firstChild.value;
       const taskDescription = form.children.item(1).value;
       const task = createTask();
 
       task.setTitle(taskName);
       task.setDescription(taskDescription);
-      // .append(task);
       closeModal();
     });
     cancelBtnTask.addEventListener("click", closeModal);
@@ -96,3 +100,12 @@ import { projects } from "./storage";
 
   function saveProject(form) {}
 })();
+
+//todo
+/* 
+
+add tasks to projects
+render the appropriate tasks depending on the project
+
+
+*/
