@@ -7,6 +7,12 @@ const createList = function () {
     dataStore[listSize++] = element;
   };
 
+  const get = (index) => {
+    const foundAt = find(index);
+    const element = dataStore[foundAt];
+    return element;
+  };
+
   const find = (element) => {
     for (let i = 0; i < dataStore.length; ++i) {
       if (dataStore[i] == element) return i;

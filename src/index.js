@@ -91,8 +91,9 @@ import { projects } from "./storage";
   }
 
   function renderTasks(children, child) {
-    for (const [index] of children.entries()) {
-      console.log(index);
+    for (const [index, child] of children.entries()) {
+      projects.moveTo(index);
+      console.log(projects.getElement().getName());
     }
   }
 
