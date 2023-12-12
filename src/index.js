@@ -8,16 +8,16 @@ import {
 import "./style.css";
 import { createProject } from "./project";
 import { createTask } from "./task";
-import { projects } from "./storage";
+import { createList } from "./storage";
 
 (function () {
   const mainBody = createMainLayoutElements();
-  const main = document.body.querySelector("main");
-  const taskContainer = document.getElementById("taskContainer");
   const projContainer = document.querySelector("#project-container");
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
+  const projects = createList();
+  let currentProject;
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
@@ -45,9 +45,7 @@ import { projects } from "./storage";
       projects.append(project);
 
       closeModal();
-      renderProjects(project);
-
-      addEventListenerToProjects();
+      renderProjects();
     });
 
     cancelBtnProj.addEventListener("click", closeModal);
@@ -70,6 +68,9 @@ import { projects } from "./storage";
 
       task.setTitle(taskName);
       task.setDescription(taskDescription);
+      currentProject.addTask(task);
+      renderTasks(currentProject);
+
       closeModal();
     });
     cancelBtnTask.addEventListener("click", closeModal);
@@ -82,27 +83,25 @@ import { projects } from "./storage";
     modalContainer.removeChild(modalContainer.firstChild);
   }
 
-  function addEventListenerToProjects() {
-    let [...children] = document.querySelectorAll(".project");
-    children.forEach((child) =>
-      child.addEventListener("click", function () {
-        renderTasks(children, child);
-      })
-    );
+  function addEventListenerToProjects(projectObj, projectElement) {
+    projectElement.addEventListener("click", function () {
+      currentProject = projectObj;
+      console.log(currentProject);
+      renderTasks(projectObj);
+    });
   }
 
-  function renderTasks(children, child) {
-    taskContainer.innerHTML = "";
-    for (const [index, child] of children.entries()) {
-      projects.moveTo(index);
-      let project = projects.getElement().getName();
+  function renderTasks(projectObj) {
+    const taskContainer = document.getElementById("task-container");
 
-      project.getTasks.forEach((task) => {
-        let taskElement = createTaskElement(task);
-        taskContainer.appendChild(taskElement);
-      });
+    console.log(projectObj.getTasks());
+    for (let task of projectObj.getTasks()) {
+      let newTask = createTaskElement(task);
+      taskContainer.appendChild(newTask);
     }
   }
+
+  function findTaskObj(taskElement) {}
 
   function saveProject(form) {}
   function renderProjects() {
@@ -111,9 +110,10 @@ import { projects } from "./storage";
       projects.currPos() < projects.length();
       projects.next()
     ) {
-      const project = projects.getElement();
-      const proj = createProjectElement(project);
-      projContainer.appendChild(proj);
+      let projObject = projects.getElement();
+      let projElement = createProjectElement(projObject);
+      addEventListenerToProjects(projObject, projElement);
+      projContainer.appendChild(projElement);
     }
   }
 })();

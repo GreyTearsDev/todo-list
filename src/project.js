@@ -32,7 +32,7 @@ const createProject = () => {
   };
 
   const getTasks = () => {
-    return tasks;
+    return tasks.toString();
   };
 
   return {

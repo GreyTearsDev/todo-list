@@ -134,6 +134,4 @@ const createList = function () {
   };
 };
 
-let projects = createList();
-
-export { createList, projects };
+export { createList };
