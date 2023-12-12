@@ -45,15 +45,11 @@ import { createList } from "./storage";
       const noName = "Unnamed";
       const noDesc = "No description";
 
-      console.log(typeof projName);
-
       projName == "" ? project.setName(noName) : project.setName(projName);
       projDesc == ""
         ? project.setDescription(noDesc)
-        : project.setName(projName);
+        : project.setDescription(projDesc);
 
-      // project.setName(projName);
-      // project.setDescription(projDescription);
       projects.append(project);
       currentProject = project;
 
@@ -131,9 +127,7 @@ import { createList } from "./storage";
     content.forEach((element) => modal.appendChild(element));
     modal.style.display = "block";
   }
-  function findTaskObj(taskElement) {}
 
-  function saveProject(form) {}
   function renderProjects() {
     for (
       projects.front();
