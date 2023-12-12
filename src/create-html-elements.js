@@ -8,9 +8,6 @@ const createTaskElement = (task) => {
   const dueDateInfo = document.createElement("p");
   const priority = document.createElement("h5");
 
-  btnDelete.textContent = "x";
-  btnDelete.id = "delete-task";
-
   dueDateInfo.textContent = task.taskDates.getDueDate();
   dueDateContainer.appendChild(dueDateInfo);
 
@@ -19,11 +16,12 @@ const createTaskElement = (task) => {
   description.textContent = task.getDescription();
 
   btnDelete.textContent = "Delete";
-  btnDelete.id = "btn-delete-task";
+  btnDelete.className = "btn-delete-task";
 
   btnDone.textContent = "Completed";
   btnDone.id = "btn-completed";
 
+  body.className = "body-task";
   body.appendChild(title);
   body.appendChild(priority);
   body.appendChild(description);
@@ -190,7 +188,7 @@ const newTaskForm = () => {
   const taskDescription = document.createElement("textarea");
   const dueDate = document.createElement("label");
   const date = document.createElement("input");
-  const submit = document.createElement("button");
+  const submitBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   const prioritySelector = createSelectPriorityElement();
 
@@ -201,8 +199,8 @@ const newTaskForm = () => {
   date.type = "date";
   date.id = "date-field";
 
-  submit.textContent = "Create";
-  submit.id = "submit-task";
+  submitBtn.textContent = "Create";
+  submitBtn.id = "btn-submit-task";
 
   taskTitle.placeholder = "Title: ";
   taskDescription.placeholder = "Description: ";
@@ -214,7 +212,7 @@ const newTaskForm = () => {
   body.appendChild(taskDescription);
   body.appendChild(dueDate);
   body.appendChild(date);
-  body.appendChild(submit);
+  body.appendChild(submitBtn);
   body.appendChild(cancelBtn);
 
   return body;

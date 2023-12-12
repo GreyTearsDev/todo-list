@@ -39,14 +39,6 @@ const createTask = () => {
     return priority;
   };
 
-  const addCheckListItem = (item) => {
-    checkList.append(item);
-  };
-
-  const removeCheckListItem = (item) => {
-    checkList.remove(item);
-  };
-
   return {
     setTitle,
     getPriority,
@@ -55,8 +47,6 @@ const createTask = () => {
     getDescription,
     getTitle,
     getPriority,
-    addCheckListItem,
-    removeCheckListItem,
     getTaskStatus,
     switchTaskStatus,
     taskDates,

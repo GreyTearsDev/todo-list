@@ -69,11 +69,10 @@ import { createList } from "./storage";
     const form = newTaskForm();
     openModal(form);
 
-    const delTaskBtn = document.querySelector("#delete-task");
-    const submitTask = document.querySelector("#submit-task");
-    const cancelBtnTask = document.querySelector("#btn-cancel-task");
+    const submitBtn = document.querySelector("#btn-submit-task");
+    const cancelBtn = document.querySelector("#btn-cancel-task");
 
-    submitTask.addEventListener("click", function () {
+    submitBtn.addEventListener("click", function () {
       const taskTitle = form.firstChild.value;
       const taskPriority = form.children.item(1).value;
       const taskDesc = form.children.item(2).value;
@@ -89,11 +88,15 @@ import { createList } from "./storage";
 
       if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
       task.setPriority(taskPriority);
+
       currentProject.addTask(task);
+
       renderTasks(currentProject);
+
       closeModal();
     });
-    cancelBtnTask.addEventListener("click", closeModal);
+
+    cancelBtn.addEventListener("click", closeModal);
   });
 
   function closeModal() {
@@ -122,7 +125,23 @@ import { createList } from "./storage";
     for (let task of projectObj.getTasks()) {
       let newTask = createTaskElement(task);
       taskContainer.appendChild(newTask);
+
+      let deleteBtn = newTask.children.item(5);
+      deleteBtn.addEventListener("click", removeTask);
     }
+  }
+
+  function removeTask(event) {
+    let currentTasks = currentProject.getTasks();
+    let taskContainer = event.target.parentNode.parentNode;
+    let currentTask = event.target.parentNode;
+    let index = Array.prototype.indexOf.call(
+      taskContainer.children,
+      currentTask
+    );
+
+    currentProject.removeTask(currentProject.getTasks()[index - 1]);
+    renderTasks(currentProject);
   }
 
   function openModal(...content) {
