@@ -5,7 +5,7 @@ const dateManager = () => {
   let dueDate = "";
 
   const setDueDate = (date) => {
-    dueDate = format(date, "MMMM d, yyyy");
+    dueDate = format(new Date(date), "MMMM d, yyyy");
   };
 
   const getDueDate = () => {

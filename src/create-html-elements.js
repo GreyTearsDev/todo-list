@@ -172,6 +172,7 @@ const newTaskForm = () => {
   cancelBtn.id = "btn-cancel-task";
 
   date.type = "date";
+  date.id = "date-field";
 
   submit.textContent = "Create";
   submit.id = "submit-task";

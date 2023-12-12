@@ -62,15 +62,11 @@ import { createList } from "./storage";
 
   taskBtn.addEventListener("click", function () {
     if (currentProject == undefined) {
-      let message = displayModalMessage(
-        "You don't have any project yet",
-        "Create one now!"
-      );
+      let message = displayModalMessage("Empty list!", "Create project first!");
       openModal(message);
       return;
     }
     const form = newTaskForm();
-
     openModal(form);
 
     const delTaskBtn = document.querySelector("#delete-task");
@@ -78,21 +74,22 @@ import { createList } from "./storage";
     const cancelBtnTask = document.querySelector("#btn-cancel-task");
 
     submitTask.addEventListener("click", function () {
-      const taskName = form.firstChild.value;
+      const taskTitle = form.firstChild.value;
       const taskDesc = form.children.item(1).value;
+      const taskDueDate = form.children.item(3).value;
       const task = createTask();
-      const noName = "Untitled";
+      const noTitle = "Untitled";
       const noDesc = "No description";
 
-      taskName == "" ? task.setTitle(noName) : task.setTitle(taskName);
+      taskTitle == "" ? task.setTitle(noTitle) : task.setTitle(taskTitle);
       taskDesc == ""
         ? task.setDescription(noDesc)
         : task.setDescription(taskDesc);
 
-      // task.taskDates.setDueDate(task.taskDates.getDueDate())
+      if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
+
       currentProject.addTask(task);
       renderTasks(currentProject);
-
       closeModal();
     });
     cancelBtnTask.addEventListener("click", closeModal);
