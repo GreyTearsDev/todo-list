@@ -75,8 +75,9 @@ import { createList } from "./storage";
 
     submitTask.addEventListener("click", function () {
       const taskTitle = form.firstChild.value;
-      const taskDesc = form.children.item(1).value;
-      const taskDueDate = form.children.item(3).value;
+      const taskPriority = form.children.item(1).value;
+      const taskDesc = form.children.item(2).value;
+      const taskDueDate = form.children.item(4).value;
       const task = createTask();
       const noTitle = "Untitled";
       const noDesc = "No description";
@@ -87,7 +88,7 @@ import { createList } from "./storage";
         : task.setDescription(taskDesc);
 
       if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
-
+      task.setPriority(taskPriority);
       currentProject.addTask(task);
       renderTasks(currentProject);
       closeModal();

@@ -6,6 +6,7 @@ const createTaskElement = (task) => {
   const description = document.createElement("p");
   const dueDateContainer = document.createElement("div");
   const dueDateInfo = document.createElement("p");
+  const priority = document.createElement("h5");
 
   btnDelete.textContent = "x";
   btnDelete.id = "delete-task";
@@ -14,16 +15,40 @@ const createTaskElement = (task) => {
   dueDateContainer.appendChild(dueDateInfo);
 
   title.textContent = task.getTitle();
+  priority.textContent = `${task.getPriority()}-level priority`;
   description.textContent = task.getDescription();
+
   btnDelete.textContent = "Delete";
-  btnDone.textContent = "Done";
+  btnDelete.id = "btn-delete-task";
+
+  btnDone.textContent = "Completed";
+  btnDone.id = "btn-completed";
+
   body.appendChild(title);
+  body.appendChild(priority);
   body.appendChild(description);
   body.appendChild(btnDone);
   body.appendChild(dueDateContainer);
   body.appendChild(btnDelete);
 
   return body;
+};
+
+const createSelectPriorityElement = () => {
+  const select = document.createElement("select");
+  const opt1 = document.createElement("option");
+  const opt2 = document.createElement("option");
+  const opt3 = document.createElement("option");
+
+  opt1.textContent = "High";
+  opt2.textContent = "Mid";
+  opt3.textContent = "Low";
+
+  select.appendChild(opt1);
+  select.appendChild(opt2);
+  select.appendChild(opt3);
+
+  return select;
 };
 
 const createMessageElement = (title, message) => {
@@ -167,10 +192,12 @@ const newTaskForm = () => {
   const date = document.createElement("input");
   const submit = document.createElement("button");
   const cancelBtn = document.createElement("button");
+  const prioritySelector = createSelectPriorityElement();
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-task";
 
+  dueDate.textContent = "Select a due date";
   date.type = "date";
   date.id = "date-field";
 
@@ -183,6 +210,7 @@ const newTaskForm = () => {
   taskDescription.maxLength = 40;
 
   body.appendChild(taskTitle);
+  body.appendChild(prioritySelector);
   body.appendChild(taskDescription);
   body.appendChild(dueDate);
   body.appendChild(date);
