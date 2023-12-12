@@ -62,7 +62,7 @@ const createProjectElement = (project) => {
   const deleteBtn = document.createElement("button");
 
   deleteBtn.textContent = "x";
-  deleteBtn.id = "delete-project";
+  deleteBtn.id = "btn-delete-project";
   title.textContent = project.getName();
   description.textContent = project.getDescription();
   dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
@@ -141,10 +141,10 @@ const newProjectForm = () => {
   const cancelBtn = document.createElement("button");
 
   cancelBtn.textContent = "Cancel";
-  cancelBtn.id = "btn-cancel-proj";
+  cancelBtn.id = "btn-cancel-form";
 
   submit.textContent = "Create";
-  submit.id = "submit-form";
+  submit.id = "btn-submit-form";
 
   projName.placeholder = "Project name: ";
   projDescription.placeholder = "Description: ";

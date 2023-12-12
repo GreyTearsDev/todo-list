@@ -15,7 +15,7 @@ import { createTask } from "./task";
 import { createList } from "./storage";
 
 (function () {
-  const mainBody = createMainLayoutElements();
+  createMainLayoutElements();
   const projContainer = document.querySelector("#project-container");
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
@@ -29,22 +29,15 @@ import { createList } from "./storage";
     }
   });
 
-  function openModal(...content) {
-    const modal = document.getElementById("general-modal");
-    content.forEach((element) => modal.appendChild(element));
-
-    modal.style.display = "block";
-  }
-
   projBtn.addEventListener("click", function () {
     const form = newProjectForm();
     openModal(form);
 
-    const delProjBtn = document.querySelector("#delete-project");
-    const cancelBtnProj = document.querySelector("#btn-cancel-proj");
-    const submitProj = document.querySelector("#submit-form");
+    const submitBtn = document.querySelector("#btn-submit-form");
+    const cancelBtn = document.querySelector("#btn-cancel-form");
+    const deleteBtn = document.querySelector("#delete-project");
 
-    submitProj.addEventListener("click", function () {
+    submitBtn.addEventListener("click", function () {
       projContainer.innerHTML = "";
       const projName = form.firstChild.value;
       const projDescription = form.children.item(1).value;
@@ -59,7 +52,7 @@ import { createList } from "./storage";
       renderProjects();
     });
 
-    cancelBtnProj.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
   });
 
   taskBtn.addEventListener("click", function () {
@@ -124,6 +117,11 @@ import { createList } from "./storage";
     }
   }
 
+  function openModal(...content) {
+    const modal = document.getElementById("general-modal");
+    content.forEach((element) => modal.appendChild(element));
+    modal.style.display = "block";
+  }
   function findTaskObj(taskElement) {}
 
   function saveProject(form) {}
