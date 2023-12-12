@@ -79,11 +79,16 @@ import { createList } from "./storage";
 
     submitTask.addEventListener("click", function () {
       const taskName = form.firstChild.value;
-      const taskDescription = form.children.item(1).value;
+      const taskDesc = form.children.item(1).value;
       const task = createTask();
+      const noName = "Untitled";
+      const noDesc = "No description";
 
-      task.setTitle(taskName);
-      task.setDescription(taskDescription);
+      taskName == "" ? task.setTitle(noName) : task.setTitle(taskName);
+      taskDesc == ""
+        ? task.setDescription(noDesc)
+        : task.setDescription(taskDesc);
+
       // task.taskDates.setDueDate(task.taskDates.getDueDate())
       currentProject.addTask(task);
       renderTasks(currentProject);
