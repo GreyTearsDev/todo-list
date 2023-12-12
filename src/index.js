@@ -4,6 +4,10 @@ import {
   createTaskElement,
   newProjectForm,
   newTaskForm,
+  createMessageElement,
+  createAddTaskButton,
+  createAddProjectButton,
+  createModal,
 } from "./create-html-elements";
 import "./style.css";
 import { createProject } from "./project";
@@ -25,10 +29,16 @@ import { createList } from "./storage";
     }
   });
 
+  function openModal(...content) {
+    const modal = document.getElementById("general-modal");
+    content.forEach((element) => modal.appendChild(element));
+
+    modal.style.display = "block";
+  }
+
   projBtn.addEventListener("click", function () {
     const form = newProjectForm();
-    modal.appendChild(form);
-    modal.style.display = "block";
+    openModal(form);
 
     const delProjBtn = document.querySelector("#delete-project");
     const cancelBtnProj = document.querySelector("#btn-cancel-proj");
@@ -53,14 +63,21 @@ import { createList } from "./storage";
   });
 
   taskBtn.addEventListener("click", function () {
+    if (currentProject == undefined) {
+      let message = displayModalMessage(
+        "You don't have any project yet",
+        "Create one now!"
+      );
+      openModal(message);
+      return;
+    }
     const form = newTaskForm();
-    modal.appendChild(form);
+
+    openModal(form);
 
     const delTaskBtn = document.querySelector("#delete-task");
     const submitTask = document.querySelector("#submit-task");
     const cancelBtnTask = document.querySelector("#btn-cancel-task");
-
-    modal.style.display = "block";
 
     submitTask.addEventListener("click", function () {
       const taskName = form.firstChild.value;
@@ -69,7 +86,6 @@ import { createList } from "./storage";
 
       task.setTitle(taskName);
       task.setDescription(taskDescription);
-      console.log(form);
       // task.taskDates.setDueDate(task.taskDates.getDueDate())
       currentProject.addTask(task);
       renderTasks(currentProject);
@@ -81,7 +97,6 @@ import { createList } from "./storage";
 
   function closeModal() {
     const modalContainer = document.querySelector("#general-modal");
-
     modal.style.display = "none";
     modalContainer.removeChild(modalContainer.firstChild);
   }
@@ -99,12 +114,8 @@ import { createList } from "./storage";
     let [...nodes] = taskContainer.childNodes;
 
     for (let i = 0; i < nodes.length; ++i) {
-      console.log(nodes[i]);
-
-      // taskContainer.removeChild(nodes.splice(1));
-      if (i !== 0) {
-        taskContainer.removeChild(nodes[i]);
-      }
+      if (i == 0) continue;
+      taskContainer.removeChild(nodes[i]);
     }
 
     for (let task of projectObj.getTasks()) {
@@ -127,6 +138,11 @@ import { createList } from "./storage";
       addEventListenerToProjects(projObject, projElement);
       projContainer.appendChild(projElement);
     }
+  }
+
+  function displayModalMessage(title, msg) {
+    const message = createMessageElement(title, msg);
+    return message;
   }
 })();
 

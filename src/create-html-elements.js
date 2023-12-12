@@ -26,23 +26,31 @@ const createTaskElement = (task) => {
   return body;
 };
 
-const createMessageElement = (message) => {
+const createMessageElement = (title, message) => {
   const div = document.createElement("div");
-  const h2 = document.createElement("h2");
+  const h3 = document.createElement("h3");
   const p = document.createElement("p");
 
-  h2.textContent = "EMPTY LIST";
-  p.textContent = "Add a new task";
-  div.appendChild(h2);
+  h3.textContent = title;
+  p.textContent = message;
+  div.appendChild(h3);
   div.appendChild(p);
   return div;
 };
 
 const createAddTaskButton = () => {
   const btn = document.createElement("button");
-
   btn.textContent = "Add New Task";
   btn.id = "btn-new-task";
+  return btn;
+};
+
+const createAddProjectButton = () => {
+  const btn = document.createElement("button");
+
+  btn.textContent = "New Project";
+  btn.id = "btn-create-project";
+
   return btn;
 };
 
@@ -103,12 +111,10 @@ const createHeaderElement = () => {
 
 const createSideBarElement = (projects) => {
   const sideBar = document.createElement("side");
-  const btnCreateProject = document.createElement("button");
+  const btnCreateProject = createAddProjectButton();
   const projectsContainer = document.createElement("div");
 
   projectsContainer.id = "project-container";
-  btnCreateProject.textContent = "New Project";
-  btnCreateProject.id = "btn-create-project";
 
   sideBar.appendChild(btnCreateProject);
   sideBar.appendChild(projectsContainer);
@@ -191,4 +197,8 @@ export {
   createMainLayoutElements,
   newTaskForm,
   newProjectForm,
+  createMessageElement,
+  createModal,
+  createAddTaskButton,
+  createAddProjectButton,
 };
