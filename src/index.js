@@ -40,11 +40,20 @@ import { createList } from "./storage";
     submitBtn.addEventListener("click", function () {
       projContainer.innerHTML = "";
       const projName = form.firstChild.value;
-      const projDescription = form.children.item(1).value;
+      const projDesc = form.children.item(1).value;
       const project = createProject();
+      const noName = "Unnamed";
+      const noDesc = "No description";
 
-      project.setName(projName);
-      project.setDescription(projDescription);
+      console.log(typeof projName);
+
+      projName == "" ? project.setName(noName) : project.setName(projName);
+      projDesc == ""
+        ? project.setDescription(noDesc)
+        : project.setName(projName);
+
+      // project.setName(projName);
+      // project.setDescription(projDescription);
       projects.append(project);
       currentProject = project;
 
