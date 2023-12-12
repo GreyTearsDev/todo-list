@@ -3,7 +3,7 @@ const createTaskElement = (task) => {
   const btnDone = document.createElement("button");
   const btnDelete = document.createElement("button");
   const title = document.createElement("h3");
-  const description = document.createElement("input");
+  const description = document.createElement("p");
   const dueDateContainer = document.createElement("div");
   const dueDateInfo = document.createElement("p");
 
@@ -24,6 +24,26 @@ const createTaskElement = (task) => {
   body.appendChild(btnDelete);
 
   return body;
+};
+
+const createMessageElement = (message) => {
+  const div = document.createElement("div");
+  const h2 = document.createElement("h2");
+  const p = document.createElement("p");
+
+  h2.textContent = "EMPTY LIST";
+  p.textContent = "Add a new task";
+  div.appendChild(h2);
+  div.appendChild(p);
+  return div;
+};
+
+const createAddTaskButton = () => {
+  const btn = document.createElement("button");
+
+  btn.textContent = "Add New Task";
+  btn.id = "btn-new-task";
+  return btn;
 };
 
 const createProjectElement = (project) => {
@@ -89,23 +109,18 @@ const createSideBarElement = (projects) => {
   projectsContainer.id = "project-container";
   btnCreateProject.textContent = "New Project";
   btnCreateProject.id = "btn-create-project";
-  // projects.forEach((project) =>
-  //   projectsContainer.appendChild(createProjectElement(project))
-  // );
+
   sideBar.appendChild(btnCreateProject);
   sideBar.appendChild(projectsContainer);
 
   return sideBar;
 };
 
-const createMainElement = (tasks) => {
+const createMainElement = () => {
   const main = document.createElement("main");
   const taskContainer = document.createElement("div");
-  const btnNewTask = document.createElement("button");
+  const btnNewTask = createAddTaskButton();
 
-  // tasks.forEach((task) => tasksContainer.appendChild(task));
-  btnNewTask.textContent = "Add New Task";
-  btnNewTask.id = "btn-new-task";
   taskContainer.id = "task-container";
   taskContainer.appendChild(btnNewTask);
   main.appendChild(taskContainer);

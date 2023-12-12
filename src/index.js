@@ -43,6 +43,7 @@ import { createList } from "./storage";
       project.setName(projName);
       project.setDescription(projDescription);
       projects.append(project);
+      currentProject = project;
 
       closeModal();
       renderProjects();
@@ -68,6 +69,8 @@ import { createList } from "./storage";
 
       task.setTitle(taskName);
       task.setDescription(taskDescription);
+      console.log(form);
+      // task.taskDates.setDueDate(task.taskDates.getDueDate())
       currentProject.addTask(task);
       renderTasks(currentProject);
 
@@ -93,8 +96,17 @@ import { createList } from "./storage";
 
   function renderTasks(projectObj) {
     const taskContainer = document.getElementById("task-container");
+    let [...nodes] = taskContainer.childNodes;
 
-    console.log(projectObj.getTasks());
+    for (let i = 0; i < nodes.length; ++i) {
+      console.log(nodes[i]);
+
+      // taskContainer.removeChild(nodes.splice(1));
+      if (i !== 0) {
+        taskContainer.removeChild(nodes[i]);
+      }
+    }
+
     for (let task of projectObj.getTasks()) {
       let newTask = createTaskElement(task);
       taskContainer.appendChild(newTask);
