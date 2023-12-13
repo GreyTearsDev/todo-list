@@ -5,6 +5,7 @@ import {
   newProjectForm,
   newTaskForm,
   createMessageElement,
+  editProjectForm,
   createAddTaskButton,
   createAddProjectButton,
   createModal,
@@ -37,16 +38,9 @@ import { createList } from "./storage";
 
     submitBtn.addEventListener("click", function () {
       renderProjects();
-      const projName = form.firstChild.value;
-      const projDesc = form.children.item(1).value;
       const project = createProject();
-      const noName = "Unnamed";
-      const noDesc = "No description";
 
-      projName == "" ? project.setName(noName) : project.setName(projName);
-      projDesc == ""
-        ? project.setDescription(noDesc)
-        : project.setDescription(projDesc);
+      applyProjectFormInfo(form, project);
 
       projects.append(project);
       currentProject = project;
@@ -107,6 +101,8 @@ import { createList } from "./storage";
     projectElement.addEventListener("click", function () {
       currentProject = projectObj;
       renderTasks(projectObj);
+
+      projectElement.addEventListener("dblclick", editProjectInfo);
     });
   }
 
@@ -183,13 +179,40 @@ import { createList } from "./storage";
     const message = createMessageElement(title, msg);
     return message;
   }
+
+  function editProjectInfo() {
+    const form = editProjectForm(currentProject);
+    openModal(form);
+
+    const cancelBtn = document.querySelector("#btn-cancel-editForm");
+    const submitBtn = document.querySelector("#btn-submit-editForm");
+
+    cancelBtn.addEventListener("click", closeModal);
+    submitBtn.addEventListener("click", function () {
+      applyProjectFormInfo(form, currentProject);
+
+      closeModal();
+      renderProjects();
+    });
+  }
+
+  function applyProjectFormInfo(form, project) {
+    const projName = form.children.item(0).value;
+    const projDesc = form.children.item(1).value;
+    const noName = "Unnamed";
+    const noDesc = "No description";
+
+    projName == "" ? project.setName(noName) : project.setName(projName);
+    projDesc == ""
+      ? project.setDescription(noDesc)
+      : project.setDescription(projDesc);
+  }
 })();
 
 //todo
 /* 
 
-fix bug removing the entire list of projects when 
-it should only remove one
+create the edit proj form
 
 
 */

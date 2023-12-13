@@ -182,6 +182,46 @@ const newProjectForm = () => {
   return body;
 };
 
+const editProjectForm = (project) => {
+  const body = document.createElement("div");
+  const projName = document.createElement("input");
+  const projDescription = document.createElement("textarea");
+  const submit = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+  const noDescription = "No description";
+  const noName = "Unnamed";
+
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.id = "btn-cancel-editForm";
+
+  submit.textContent = "Create";
+  submit.id = "btn-submit-editForm";
+
+  if (project.getName() == noName) {
+    console.log("ya");
+
+    projName.placeholder = project.getName();
+  } else {
+    console.log(projName.textContent);
+    projName.value = project.getName();
+  }
+
+  if (project.getDescription() == noDescription) {
+    projDescription.placeholder = project.getDescription();
+  } else {
+    projDescription.textContent = project.getDescription();
+  }
+
+  projDescription.maxLength = 80;
+
+  body.appendChild(projName);
+  body.appendChild(projDescription);
+  body.appendChild(submit);
+  body.appendChild(cancelBtn);
+
+  return body;
+};
+
 const newTaskForm = () => {
   const body = document.createElement("div");
   const taskTitle = document.createElement("input");
@@ -228,4 +268,5 @@ export {
   createModal,
   createAddTaskButton,
   createAddProjectButton,
+  editProjectForm,
 };
