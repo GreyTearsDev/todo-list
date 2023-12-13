@@ -16,7 +16,6 @@ import { createList } from "./storage";
 
 (function () {
   createMainLayoutElements();
-  const projContainer = document.querySelector("#project-container");
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
@@ -35,10 +34,9 @@ import { createList } from "./storage";
 
     const submitBtn = document.querySelector("#btn-submit-form");
     const cancelBtn = document.querySelector("#btn-cancel-form");
-    const deleteBtn = document.querySelector("#delete-project");
 
     submitBtn.addEventListener("click", function () {
-      projContainer.innerHTML = "";
+      renderProjects();
       const projName = form.firstChild.value;
       const projDesc = form.children.item(1).value;
       const project = createProject();
@@ -108,7 +106,6 @@ import { createList } from "./storage";
   function addEventListenerToProjects(projectObj, projectElement) {
     projectElement.addEventListener("click", function () {
       currentProject = projectObj;
-      console.log(currentProject);
       renderTasks(projectObj);
     });
   }
@@ -132,7 +129,6 @@ import { createList } from "./storage";
   }
 
   function removeTask(event) {
-    let currentTasks = currentProject.getTasks();
     let taskContainer = event.target.parentNode.parentNode;
     let currentTask = event.target.parentNode;
     let index = Array.prototype.indexOf.call(
@@ -144,6 +140,20 @@ import { createList } from "./storage";
     renderTasks(currentProject);
   }
 
+  function removeProject(event) {
+    const projContainer = document.querySelector("#project-container");
+    const currProjElement = event.target.parentNode;
+    let index = Array.prototype.indexOf.call(
+      projContainer.children,
+      currProjElement
+    );
+    projects.moveTo(index);
+    projects.remove(projects.getElement());
+
+    projContainer.removeChild(currProjElement);
+    renderProjects();
+  }
+
   function openModal(...content) {
     const modal = document.getElementById("general-modal");
     content.forEach((element) => modal.appendChild(element));
@@ -151,6 +161,9 @@ import { createList } from "./storage";
   }
 
   function renderProjects() {
+    const projContainer = document.querySelector("#project-container");
+    projContainer.innerHTML = "";
+
     for (
       projects.front();
       projects.currPos() < projects.length();
@@ -158,6 +171,9 @@ import { createList } from "./storage";
     ) {
       let projObject = projects.getElement();
       let projElement = createProjectElement(projObject);
+      let deleteBtn = projElement.children.item(3);
+
+      deleteBtn.addEventListener("click", removeProject);
       addEventListenerToProjects(projObject, projElement);
       projContainer.appendChild(projElement);
     }
@@ -172,8 +188,8 @@ import { createList } from "./storage";
 //todo
 /* 
 
-add tasks to projects
-render the appropriate tasks depending on the project
+fix bug removing the entire list of projects when 
+it should only remove one
 
 
 */

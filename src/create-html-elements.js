@@ -15,7 +15,7 @@ const createTaskElement = (task) => {
   priority.textContent = `${task.getPriority()}-level priority`;
   description.textContent = task.getDescription();
 
-  btnDelete.textContent = "Delete";
+  btnDelete.textContent = "x";
   btnDelete.className = "btn-delete-task";
 
   btnDone.textContent = "Completed";
