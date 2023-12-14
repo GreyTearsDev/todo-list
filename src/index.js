@@ -189,10 +189,10 @@ const log = console.log;
     openModal(form);
 
     const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");
-    const submitBtn = document.querySelector("#btn-submit-editTaskForm");
+    const updateBtn = document.querySelector("#btn-submit-editTaskForm");
 
     cancelBtn.addEventListener("click", closeModal);
-    submitBtn.addEventListener("click", function () {
+    updateBtn.addEventListener("click", function () {
       applyProjectFormInfo(form, currentProject);
       closeModal();
       renderProjects();
@@ -213,9 +213,9 @@ const log = console.log;
 
   function applyTaskFormInfo(form, task) {
     const taskTitle = form.children.item(0).value;
-    const taskPriority = form.children.item(1).value;
-    const taskDesc = form.children.item(2).value;
-    const taskDueDate = form.children.item(4).value;
+    const taskPriority = form.children.item(2).value;
+    const taskDesc = form.children.item(3).value;
+    const taskDueDate = form.children.item(5).value;
     const noTitle = "Untitled";
     const noDesc = "No description";
 

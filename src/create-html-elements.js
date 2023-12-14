@@ -188,8 +188,8 @@ const editProjectForm = (project) => {
   const projDescription = document.createElement("textarea");
   const submit = document.createElement("button");
   const cancelBtn = document.createElement("button");
-  const noDescription = "No description";
-  const noName = "Unnamed";
+  const NO_DESC = "No description";
+  const NO_NAME = "Unnamed";
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editProjForm";
@@ -197,13 +197,13 @@ const editProjectForm = (project) => {
   submit.textContent = "Update";
   submit.id = "btn-submit-editProjForm";
 
-  if (project.getName() == noName) {
+  if (project.getName() == NO_NAME) {
     projName.placeholder = project.getName();
   } else {
     projName.value = project.getName();
   }
 
-  if (project.getDescription() == noDescription) {
+  if (project.getDescription() == NO_DESC) {
     projDescription.placeholder = project.getDescription();
   } else {
     projDescription.textContent = project.getDescription();
@@ -227,6 +227,7 @@ const newTaskForm = () => {
   const date = document.createElement("input");
   const submitBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
+  const priorityInfo = document.createElement("label");
   const prioritySelector = createSelectPriorityElement();
 
   cancelBtn.textContent = "Cancel";
@@ -242,9 +243,12 @@ const newTaskForm = () => {
   taskTitle.placeholder = "Title: ";
   taskDescription.placeholder = "Description: ";
 
+  priorityInfo.textContent = "Priority";
+
   taskDescription.maxLength = 40;
 
   body.appendChild(taskTitle);
+  body.appendChild(priorityInfo);
   body.appendChild(prioritySelector);
   body.appendChild(taskDescription);
   body.appendChild(dueDate);
@@ -261,9 +265,12 @@ const editTaskForm = (task) => {
   const taskDescription = document.createElement("textarea");
   const dueDate = document.createElement("label");
   const date = document.createElement("input");
-  const submitBtn = document.createElement("button");
+  const updateBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   const prioritySelector = createSelectPriorityElement();
+  const priorityInfo = document.createElement("label");
+  const NO_TITLE = "Untitled";
+  const NO_DESC = "No description";
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editTaskForm";
@@ -272,20 +279,34 @@ const editTaskForm = (task) => {
   date.type = "date";
   date.id = "date-field";
 
-  submitBtn.textContent = "Update";
-  submitBtn.id = "btn-submit-editTaskForm";
+  if (task.taskDates.getDueDate() != "") {
+    date.value = task.taskDates.getDueDate();
+  }
 
-  taskTitle.placeholder = "Title: ";
-  taskDescription.placeholder = "Description: ";
+  updateBtn.textContent = "Update";
+  updateBtn.id = "btn-submit-editTaskForm";
 
+  if (task.getTitle() == NO_TITLE) {
+    taskTitle.placeholder = task.getTitle();
+  } else {
+    taskTitle.value = task.getTitle();
+  }
+
+  if (task.getDescription() == NO_DESC) {
+    taskDescription.placeholder = task.getDescription();
+  } else {
+    taskDescription.textContent = task.getDescription();
+  }
   taskDescription.maxLength = 40;
+  priorityInfo.textContent = "Priority";
 
   body.appendChild(taskTitle);
+  body.appendChild(priorityInfo);
   body.appendChild(prioritySelector);
   body.appendChild(taskDescription);
   body.appendChild(dueDate);
   body.appendChild(date);
-  body.appendChild(submitBtn);
+  body.appendChild(updateBtn);
   body.appendChild(cancelBtn);
 
   return body;
