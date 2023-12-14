@@ -47,4 +47,12 @@ const createProject = () => {
   };
 };
 
-export { createProject };
+const getTaskIndex = (project, task, container) => {
+  let taskContainer = container;
+  let currentTask = task;
+  let index = Array.prototype.indexOf.call(taskContainer.children, currentTask);
+
+  return project.getTasks()[index - 1];
+};
+
+export { createProject, getTaskIndex };

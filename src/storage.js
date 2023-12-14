@@ -94,11 +94,6 @@ const createList = function () {
 
   const next = () => {
     ++position;
-    // if (position < listSize - 1) {
-    //   ++position;
-
-    //   console.log("hiii");
-    // }
   };
 
   const currPos = () => {

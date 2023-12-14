@@ -192,17 +192,14 @@ const editProjectForm = (project) => {
   const noName = "Unnamed";
 
   cancelBtn.textContent = "Cancel";
-  cancelBtn.id = "btn-cancel-editForm";
+  cancelBtn.id = "btn-cancel-editProjForm";
 
-  submit.textContent = "Create";
-  submit.id = "btn-submit-editForm";
+  submit.textContent = "Update";
+  submit.id = "btn-submit-editProjForm";
 
   if (project.getName() == noName) {
-    console.log("ya");
-
     projName.placeholder = project.getName();
   } else {
-    console.log(projName.textContent);
     projName.value = project.getName();
   }
 
@@ -258,6 +255,42 @@ const newTaskForm = () => {
   return body;
 };
 
+const editTaskForm = (task) => {
+  const body = document.createElement("div");
+  const taskTitle = document.createElement("input");
+  const taskDescription = document.createElement("textarea");
+  const dueDate = document.createElement("label");
+  const date = document.createElement("input");
+  const submitBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+  const prioritySelector = createSelectPriorityElement();
+
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.id = "btn-cancel-editTaskForm";
+
+  dueDate.textContent = "Select a due date";
+  date.type = "date";
+  date.id = "date-field";
+
+  submitBtn.textContent = "Update";
+  submitBtn.id = "btn-submit-editTaskForm";
+
+  taskTitle.placeholder = "Title: ";
+  taskDescription.placeholder = "Description: ";
+
+  taskDescription.maxLength = 40;
+
+  body.appendChild(taskTitle);
+  body.appendChild(prioritySelector);
+  body.appendChild(taskDescription);
+  body.appendChild(dueDate);
+  body.appendChild(date);
+  body.appendChild(submitBtn);
+  body.appendChild(cancelBtn);
+
+  return body;
+};
+
 export {
   createTaskElement,
   createProjectElement,
@@ -269,4 +302,5 @@ export {
   createAddTaskButton,
   createAddProjectButton,
   editProjectForm,
+  editTaskForm,
 };
