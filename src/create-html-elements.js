@@ -299,6 +299,7 @@ const editTaskForm = (task) => {
   }
   taskDescription.maxLength = 40;
   priorityInfo.textContent = "Priority";
+  prioritySelector.value = task.getPriority();
 
   body.appendChild(taskTitle);
   body.appendChild(priorityInfo);
