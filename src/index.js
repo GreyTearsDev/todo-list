@@ -9,7 +9,7 @@ import {
   editTaskForm,
 } from "./create-html-elements";
 import "./style.css";
-import { createProject, getTaskIndex } from "./project";
+import { createProject, getTaskIndex, getTaskObject } from "./project";
 import { createTask } from "./task";
 import { createList } from "./storage";
 
@@ -113,7 +113,8 @@ const log = console.log;
   function removeTask(event) {
     let taskContainer = event.target.parentNode.parentNode;
     let currentTask = event.target.parentNode;
-    let task = getTaskIndex(currentProject, currentTask, taskContainer);
+    let index = getTaskIndex(currentTask, taskContainer);
+    let task = getTaskObject(currentProject, index);
 
     currentProject.removeTask(task);
     renderTasks(currentProject);
@@ -179,11 +180,11 @@ const log = console.log;
   }
 
   function editTaskInfo(event) {
-    // const taskParent = Array.prototype.slice.call(
-    //   event.target.parentNode.parentNode
-    // );
-    const task = currentProject.getTasks();
-    console.log(task);
+    let taskContainer = event.target.parentNode.parentNode;
+    let currentTask = event.target.parentNode;
+    let index = getTaskIndex(currentTask, taskContainer);
+    let task = getTaskObject(currentProject, index);
+
     const form = editTaskForm(task);
     openModal(form);
 
