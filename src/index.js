@@ -182,19 +182,15 @@ import { createList } from "./storage";
     let currentTask = event.target.parentNode;
     let index = getTaskIndex(currentTask, taskContainer);
     let task = getTaskObject(currentProject, index);
-    currentProject.removeTask(currentProject.removeTask(task));
-
     const form = editTaskForm(task);
-    openModal(form);
 
+    openModal(form);
     const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");
     const updateBtn = document.querySelector("#btn-update-editTaskForm");
 
     cancelBtn.addEventListener("click", closeModal);
     updateBtn.addEventListener("click", function () {
-      console.log(
-        "current projects number of tasks: " + currentProject.getTasks().length
-      );
+      currentProject.removeTask(currentProject.removeTask(task));
       applyTaskFormInfo(form, task);
       closeModal();
       renderTasks(currentProject);
