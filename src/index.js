@@ -13,8 +13,6 @@ import { createProject, getTaskIndex, getTaskObject } from "./project";
 import { createTask } from "./task";
 import { createList } from "./storage";
 
-const log = console.log;
-
 (function () {
   createMainLayoutElements();
   const taskBtn = document.querySelector("#btn-new-task");
@@ -71,17 +69,10 @@ const log = console.log;
     cancelBtn.addEventListener("click", closeModal);
   });
 
-  function closeModal() {
-    const modalContainer = document.querySelector("#general-modal");
-    modal.style.display = "none";
-    modalContainer.removeChild(modalContainer.firstChild);
-  }
-
   function addEventListenerToProjects(projectObj, projectElement) {
     projectElement.addEventListener("click", function () {
       currentProject = projectObj;
       renderTasks(projectObj);
-
       projectElement.addEventListener("dblclick", editProjectInfo);
     });
   }
@@ -89,7 +80,6 @@ const log = console.log;
   function addEventListenerToTasks(taskElement) {
     const newTask = taskElement;
     const deleteBtn = newTask.children.item(5);
-
     deleteBtn.addEventListener("click", removeTask);
     newTask.addEventListener("dblclick", editTaskInfo);
   }
@@ -104,6 +94,8 @@ const log = console.log;
     }
 
     for (let task of projectObj.getTasks()) {
+      console.log(task.getTitle());
+      console.log(projectObj.getTasks().length);
       let newTask = createTaskElement(task);
       addEventListenerToTasks(newTask);
       taskContainer.appendChild(newTask);
@@ -138,6 +130,12 @@ const log = console.log;
     const modal = document.getElementById("general-modal");
     content.forEach((element) => modal.appendChild(element));
     modal.style.display = "block";
+  }
+
+  function closeModal() {
+    const modalContainer = document.querySelector("#general-modal");
+    modal.style.display = "none";
+    modalContainer.removeChild(modalContainer.firstChild);
   }
 
   function renderProjects() {
@@ -184,18 +182,22 @@ const log = console.log;
     let currentTask = event.target.parentNode;
     let index = getTaskIndex(currentTask, taskContainer);
     let task = getTaskObject(currentProject, index);
+    currentProject.removeTask(currentProject.removeTask(task));
 
     const form = editTaskForm(task);
     openModal(form);
 
     const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");
-    const updateBtn = document.querySelector("#btn-submit-editTaskForm");
+    const updateBtn = document.querySelector("#btn-update-editTaskForm");
 
     cancelBtn.addEventListener("click", closeModal);
     updateBtn.addEventListener("click", function () {
-      applyProjectFormInfo(form, currentProject);
+      console.log(
+        "current projects number of tasks: " + currentProject.getTasks().length
+      );
+      applyTaskFormInfo(form, task);
       closeModal();
-      renderProjects();
+      renderTasks(currentProject);
     });
   }
 
@@ -233,7 +235,8 @@ const log = console.log;
 //todo
 /* 
 
-create the edit task pop up forum
+display the appropriate date when editing tasks
+fix bug duplicating tasks when submit button in forum is clicked
 
 
 */

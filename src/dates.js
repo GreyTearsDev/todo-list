@@ -20,7 +20,12 @@ const dateManager = () => {
     return differenceInDays(dueDate, creationDate);
   };
 
-  return { getDueDate, getCreationDate, getTimeDifference, setDueDate };
+  return {
+    getDueDate,
+    getCreationDate,
+    getTimeDifference,
+    setDueDate,
+  };
 };
 
 export { dateManager };

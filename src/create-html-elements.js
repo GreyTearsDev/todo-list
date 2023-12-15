@@ -284,7 +284,7 @@ const editTaskForm = (task) => {
   }
 
   updateBtn.textContent = "Update";
-  updateBtn.id = "btn-submit-editTaskForm";
+  updateBtn.id = "btn-update-editTaskForm";
 
   if (task.getTitle() == NO_TITLE) {
     taskTitle.placeholder = task.getTitle();
