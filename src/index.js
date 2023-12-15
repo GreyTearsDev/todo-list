@@ -9,9 +9,18 @@ import {
   editTaskForm,
 } from "./create-html-elements";
 import "./style.css";
-import { createProject, getTaskIndex, getTaskObject } from "./project";
-import { createTask } from "./task";
+import { createProject } from "./project";
+import {
+  createTask,
+  removeTask,
+  getTaskIndex,
+  getTaskObject,
+  renderTasks,
+  addEventListenerToTasks,
+  applyTaskFormInfo,
+} from "./task";
 import { createList } from "./storage";
+import { openModal, closeModal } from "./util";
 
 (function () {
   createMainLayoutElements();
@@ -61,7 +70,7 @@ import { createList } from "./storage";
 
     submitBtn.addEventListener("click", function () {
       const task = createTask();
-      applyTaskFormInfo(form, task);
+      applyTaskFormInfo(form, task, currentProject);
       renderTasks(currentProject);
       closeModal();
     });
@@ -77,40 +86,43 @@ import { createList } from "./storage";
     });
   }
 
-  function addEventListenerToTasks(taskElement) {
-    const newTask = taskElement;
-    const deleteBtn = newTask.children.item(5);
-    deleteBtn.addEventListener("click", removeTask);
-    newTask.addEventListener("dblclick", editTaskInfo);
-  }
+  // function addEventListenerToTasks(taskElement, currentProject) {
+  //   const newTask = taskElement;
+  //   const deleteBtn = newTask.children.item(5);
 
-  function renderTasks(projectObj) {
-    const taskContainer = document.getElementById("task-container");
-    let [...nodes] = taskContainer.childNodes;
+  //   deleteBtn.addEventListener("click", function (event) {
+  //     removeTask(event, currentProject);
+  //     renderTasks(currentProject);
+  //   });
+  //   newTask.addEventListener("dblclick", editTaskInfo);
+  // }
 
-    for (let i = 0; i < nodes.length; ++i) {
-      if (i == 0) continue;
-      taskContainer.removeChild(nodes[i]);
-    }
+  // function renderTasks(projectObj) {
+  //   const taskContainer = document.getElementById("task-container");
+  //   let [...nodes] = taskContainer.childNodes;
 
-    for (let task of projectObj.getTasks()) {
-      console.log(task.getTitle());
-      console.log(projectObj.getTasks().length);
-      let newTask = createTaskElement(task);
-      addEventListenerToTasks(newTask);
-      taskContainer.appendChild(newTask);
-    }
-  }
+  //   for (let i = 0; i < nodes.length; ++i) {
+  //     if (i == 0) continue;
+  //     taskContainer.removeChild(nodes[i]);
+  //   }
 
-  function removeTask(event) {
-    let taskContainer = event.target.parentNode.parentNode;
-    let currentTask = event.target.parentNode;
-    let index = getTaskIndex(currentTask, taskContainer);
-    let task = getTaskObject(currentProject, index);
+  //   for (let task of projectObj.getTasks()) {
+  //     console.log(task.getTitle());
+  //     console.log(projectObj.getTasks().length);
+  //     let newTask = createTaskElement(task);
+  //     addEventListenerToTasks(newTask, projectObj);
+  //     taskContainer.appendChild(newTask);
+  //   }
+  // }
 
-    currentProject.removeTask(task);
-    renderTasks(currentProject);
-  }
+  // function removeTask(event) {
+  //   let taskContainer = event.target.parentNode.parentNode;
+  //   let currentTask = event.target.parentNode;
+  //   let index = getTaskIndex(currentTask, taskContainer);
+  //   let task = getTaskObject(currentProject, index);
+
+  //   currentProject.removeTask(task);
+  // }
 
   function removeProject(event) {
     const projContainer = document.querySelector("#project-container");
@@ -126,17 +138,17 @@ import { createList } from "./storage";
     renderProjects();
   }
 
-  function openModal(...content) {
-    const modal = document.getElementById("general-modal");
-    content.forEach((element) => modal.appendChild(element));
-    modal.style.display = "block";
-  }
+  // function openModal(...content) {
+  //   const modal = document.getElementById("general-modal");
+  //   content.forEach((element) => modal.appendChild(element));
+  //   modal.style.display = "block";
+  // }
 
-  function closeModal() {
-    const modalContainer = document.querySelector("#general-modal");
-    modal.style.display = "none";
-    modalContainer.removeChild(modalContainer.firstChild);
-  }
+  // function closeModal() {
+  //   const modalContainer = document.querySelector("#general-modal");
+  //   modal.style.display = "none";
+  //   modalContainer.removeChild(modalContainer.firstChild);
+  // }
 
   function renderProjects() {
     const projContainer = document.querySelector("#project-container");
@@ -177,26 +189,6 @@ import { createList } from "./storage";
     });
   }
 
-  function editTaskInfo(event) {
-    let taskContainer = event.target.parentNode.parentNode;
-    let currentTask = event.target.parentNode;
-    let index = getTaskIndex(currentTask, taskContainer);
-    let task = getTaskObject(currentProject, index);
-    const form = editTaskForm(task);
-
-    openModal(form);
-    const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");
-    const updateBtn = document.querySelector("#btn-update-editTaskForm");
-
-    cancelBtn.addEventListener("click", closeModal);
-    updateBtn.addEventListener("click", function () {
-      currentProject.removeTask(currentProject.removeTask(task));
-      applyTaskFormInfo(form, task);
-      closeModal();
-      renderTasks(currentProject);
-    });
-  }
-
   function applyProjectFormInfo(form, project) {
     const projName = form.children.item(0).value;
     const projDesc = form.children.item(1).value;
@@ -207,24 +199,6 @@ import { createList } from "./storage";
     projDesc == ""
       ? project.setDescription(noDesc)
       : project.setDescription(projDesc);
-  }
-
-  function applyTaskFormInfo(form, task) {
-    const taskTitle = form.children.item(0).value;
-    const taskPriority = form.children.item(2).value;
-    const taskDesc = form.children.item(3).value;
-    const taskDueDate = form.children.item(5).value;
-    const noTitle = "Untitled";
-    const noDesc = "No description";
-
-    taskTitle == "" ? task.setTitle(noTitle) : task.setTitle(taskTitle);
-    taskDesc == ""
-      ? task.setDescription(noDesc)
-      : task.setDescription(taskDesc);
-
-    if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
-    task.setPriority(taskPriority);
-    currentProject.addTask(task);
   }
 })();
 
