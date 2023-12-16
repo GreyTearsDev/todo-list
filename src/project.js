@@ -1,8 +1,22 @@
-import { createList, manageCurrentProject, projects } from "./storage";
+import { createList } from "./storage";
 import { dateManager } from "./dates";
 import { openModal, closeModal } from "./util";
 import { createProjectElement, editProjectForm } from "./create-html-elements";
 import { renderTasks } from "./task";
+
+const projects = createList();
+const manageCurrentProject = (function () {
+  let currentProject;
+  function setProject(project) {
+    currentProject = project;
+  }
+
+  function getProject() {
+    return currentProject;
+  }
+
+  return { setProject, getProject };
+})();
 
 const createProject = () => {
   let name = "";
@@ -126,4 +140,10 @@ function removeProject(event, projects) {
   renderProjects(projects);
 }
 
-export { createProject, renderProjects, applyProjectFormInfo };
+export {
+  createProject,
+  renderProjects,
+  applyProjectFormInfo,
+  manageCurrentProject,
+  projects,
+};

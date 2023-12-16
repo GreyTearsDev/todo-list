@@ -143,4 +143,4 @@ const manageCurrentProject = (function () {
   return { setProject, getProject };
 })();
 
-export { createList, manageCurrentProject, projects };
+export { createList };

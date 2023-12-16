@@ -4,9 +4,14 @@ import {
   newTaskForm,
 } from "./create-html-elements";
 import "./style.css";
-import { createProject, renderProjects, applyProjectFormInfo } from "./project";
+import {
+  createProject,
+  renderProjects,
+  applyProjectFormInfo,
+  manageCurrentProject,
+  projects,
+} from "./project";
 import { createTask, renderTasks, applyTaskFormInfo } from "./task";
-import { manageCurrentProject, projects } from "./storage";
 import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
