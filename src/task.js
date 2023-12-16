@@ -56,10 +56,7 @@ const createTask = () => {
 };
 
 const getTaskIndex = (task, container) => {
-  let taskContainer = container;
-  let currentTask = task;
-  let index = Array.prototype.indexOf.call(taskContainer.children, currentTask);
-
+  let index = Array.prototype.indexOf.call(container.children, task);
   return index;
 };
 
@@ -70,9 +67,9 @@ const getTaskObject = (project, index) => {
 const removeTask = (event, project) => {
   let taskContainer = event.target.parentNode.parentNode;
   let currentTask = event.target.parentNode;
-  let index = getTaskIndex(currentTask, taskContainer);
-  let task = getTaskObject(project, index);
-  project.removeTask(task);
+  let taskIndex = getTaskIndex(currentTask, taskContainer);
+  let taskObject = getTaskObject(project, taskIndex);
+  project.removeTask(taskObject);
 };
 
 function renderTasks(project) {
@@ -85,23 +82,20 @@ function renderTasks(project) {
   }
 
   for (let task of project.getTasks()) {
-    console.log(task.getTitle());
-    console.log(project.getTasks().length);
     let newTask = createTaskElement(task);
     addEventListenerToTasks(newTask, project);
     taskContainer.appendChild(newTask);
   }
 }
 
-function addEventListenerToTasks(taskElement, project) {
-  const newTask = taskElement;
-  const deleteBtn = newTask.children.item(5);
+function addEventListenerToTasks(task, project) {
+  const deleteBtn = task.children.item(5);
 
   deleteBtn.addEventListener("click", function (event) {
     removeTask(event, project);
     renderTasks(project);
   });
-  newTask.addEventListener("dblclick", function (event) {
+  task.addEventListener("dblclick", function (event) {
     editTaskInfo(event, project);
   });
 }
@@ -126,7 +120,7 @@ function editTaskInfo(event, project) {
   });
 }
 
-function applyTaskFormInfo(form, task, currentProject) {
+function applyTaskFormInfo(form, task, project) {
   const taskTitle = form.children.item(0).value;
   const taskPriority = form.children.item(2).value;
   const taskDesc = form.children.item(3).value;
@@ -139,15 +133,7 @@ function applyTaskFormInfo(form, task, currentProject) {
 
   if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
   task.setPriority(taskPriority);
-  currentProject.addTask(task);
+  project.addTask(task);
 }
 
-export {
-  createTask,
-  removeTask,
-  getTaskIndex,
-  getTaskObject,
-  renderTasks,
-  addEventListenerToTasks,
-  applyTaskFormInfo,
-};
+export { createTask, renderTasks, applyTaskFormInfo };

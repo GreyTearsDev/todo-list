@@ -1,24 +1,14 @@
 import {
   createMainLayoutElements,
   createProjectElement,
-  createTaskElement,
   newProjectForm,
   newTaskForm,
   createMessageElement,
   editProjectForm,
-  editTaskForm,
 } from "./create-html-elements";
 import "./style.css";
 import { createProject } from "./project";
-import {
-  createTask,
-  removeTask,
-  getTaskIndex,
-  getTaskObject,
-  renderTasks,
-  addEventListenerToTasks,
-  applyTaskFormInfo,
-} from "./task";
+import { createTask, renderTasks, applyTaskFormInfo } from "./task";
 import { createList } from "./storage";
 import { openModal, closeModal } from "./util";
 
@@ -86,44 +76,6 @@ import { openModal, closeModal } from "./util";
     });
   }
 
-  // function addEventListenerToTasks(taskElement, currentProject) {
-  //   const newTask = taskElement;
-  //   const deleteBtn = newTask.children.item(5);
-
-  //   deleteBtn.addEventListener("click", function (event) {
-  //     removeTask(event, currentProject);
-  //     renderTasks(currentProject);
-  //   });
-  //   newTask.addEventListener("dblclick", editTaskInfo);
-  // }
-
-  // function renderTasks(projectObj) {
-  //   const taskContainer = document.getElementById("task-container");
-  //   let [...nodes] = taskContainer.childNodes;
-
-  //   for (let i = 0; i < nodes.length; ++i) {
-  //     if (i == 0) continue;
-  //     taskContainer.removeChild(nodes[i]);
-  //   }
-
-  //   for (let task of projectObj.getTasks()) {
-  //     console.log(task.getTitle());
-  //     console.log(projectObj.getTasks().length);
-  //     let newTask = createTaskElement(task);
-  //     addEventListenerToTasks(newTask, projectObj);
-  //     taskContainer.appendChild(newTask);
-  //   }
-  // }
-
-  // function removeTask(event) {
-  //   let taskContainer = event.target.parentNode.parentNode;
-  //   let currentTask = event.target.parentNode;
-  //   let index = getTaskIndex(currentTask, taskContainer);
-  //   let task = getTaskObject(currentProject, index);
-
-  //   currentProject.removeTask(task);
-  // }
-
   function removeProject(event) {
     const projContainer = document.querySelector("#project-container");
     const currProjElement = event.target.parentNode;
@@ -137,18 +89,6 @@ import { openModal, closeModal } from "./util";
     projContainer.removeChild(currProjElement);
     renderProjects();
   }
-
-  // function openModal(...content) {
-  //   const modal = document.getElementById("general-modal");
-  //   content.forEach((element) => modal.appendChild(element));
-  //   modal.style.display = "block";
-  // }
-
-  // function closeModal() {
-  //   const modalContainer = document.querySelector("#general-modal");
-  //   modal.style.display = "none";
-  //   modalContainer.removeChild(modalContainer.firstChild);
-  // }
 
   function renderProjects() {
     const projContainer = document.querySelector("#project-container");

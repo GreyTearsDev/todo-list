@@ -8,16 +8,18 @@ const createTaskElement = (task) => {
   const dueDateInfo = document.createElement("p");
   const priority = document.createElement("h5");
 
-  dueDateInfo.textContent = task.taskDates.getDueDate();
-  dueDateContainer.appendChild(dueDateInfo);
+  if (task.taskDates.getDueDate() == "") {
+    dueDateInfo.textContent = "No due date!";
+  } else {
+    dueDateInfo.textContent = `Due on ${task.taskDates.getDueDate()}`;
+  }
 
+  dueDateContainer.appendChild(dueDateInfo);
   title.textContent = task.getTitle();
   priority.textContent = `${task.getPriority()}-level priority`;
   description.textContent = task.getDescription();
-
   btnDelete.textContent = "x";
   btnDelete.className = "btn-delete-task";
-
   btnDone.textContent = "Completed";
   btnDone.id = "btn-completed";
 
@@ -70,10 +72,8 @@ const createAddTaskButton = () => {
 
 const createAddProjectButton = () => {
   const btn = document.createElement("button");
-
   btn.textContent = "New Project";
   btn.id = "btn-create-project";
-
   return btn;
 };
 
@@ -132,7 +132,7 @@ const createHeaderElement = () => {
   return header;
 };
 
-const createSideBarElement = (projects) => {
+const createSideBarElement = () => {
   const sideBar = document.createElement("side");
   const btnCreateProject = createAddProjectButton();
   const projectsContainer = document.createElement("div");
@@ -153,6 +153,7 @@ const createMainElement = () => {
   taskContainer.id = "task-container";
   taskContainer.appendChild(btnNewTask);
   main.appendChild(taskContainer);
+
   return main;
 };
 
@@ -165,14 +166,12 @@ const newProjectForm = () => {
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-form";
-
   submit.textContent = "Create";
   submit.id = "btn-submit-form";
-
   projName.placeholder = "Project name: ";
+  projName.maxLength = 30;
   projDescription.placeholder = "Description: ";
-
-  projDescription.maxLength = 80;
+  projDescription.maxLength = 70;
 
   body.appendChild(projName);
   body.appendChild(projDescription);
@@ -193,9 +192,10 @@ const editProjectForm = (project) => {
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editProjForm";
-
   submit.textContent = "Update";
   submit.id = "btn-submit-editProjForm";
+  projName.maxLength = 30;
+  projDescription.maxLength = 75;
 
   if (project.getName() == NO_NAME) {
     projName.placeholder = project.getName();
@@ -208,8 +208,6 @@ const editProjectForm = (project) => {
   } else {
     projDescription.textContent = project.getDescription();
   }
-
-  projDescription.maxLength = 80;
 
   body.appendChild(projName);
   body.appendChild(projDescription);
@@ -232,20 +230,16 @@ const newTaskForm = () => {
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-task";
-
   dueDate.textContent = "Select a due date";
   date.type = "date";
   date.id = "date-field";
-
   submitBtn.textContent = "Create";
   submitBtn.id = "btn-submit-task";
-
   taskTitle.placeholder = "Title: ";
   taskDescription.placeholder = "Description: ";
-
   priorityInfo.textContent = "Priority";
-
-  taskDescription.maxLength = 40;
+  taskTitle.maxLength = 35;
+  taskDescription.maxLength = 75;
 
   body.appendChild(taskTitle);
   body.appendChild(priorityInfo);
@@ -274,17 +268,19 @@ const editTaskForm = (task) => {
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editTaskForm";
-
   dueDate.textContent = "Select a due date";
   date.type = "date";
   date.id = "date-field";
+  updateBtn.textContent = "Update";
+  updateBtn.id = "btn-update-editTaskForm";
+  taskTitle.maxLength = 35;
+  taskDescription.maxLength = 75;
+  priorityInfo.textContent = "Priority";
+  prioritySelector.value = task.getPriority();
 
   if (task.taskDates.getDueDate() != "") {
     date.value = task.taskDates.getDueDate();
   }
-
-  updateBtn.textContent = "Update";
-  updateBtn.id = "btn-update-editTaskForm";
 
   if (task.getTitle() == NO_TITLE) {
     taskTitle.placeholder = task.getTitle();
@@ -297,9 +293,6 @@ const editTaskForm = (task) => {
   } else {
     taskDescription.textContent = task.getDescription();
   }
-  taskDescription.maxLength = 40;
-  priorityInfo.textContent = "Priority";
-  prioritySelector.value = task.getPriority();
 
   body.appendChild(taskTitle);
   body.appendChild(priorityInfo);

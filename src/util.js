@@ -9,7 +9,6 @@ const closeModal = () => {
   const modal = document.getElementById("general-modal");
 
   modal.style.display = "none";
-  console.log(modalContainer);
   modalContainer.removeChild(modalContainer.firstChild);
 };
 
