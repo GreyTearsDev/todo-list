@@ -1,8 +1,8 @@
-import { createList, manageCurrentProject } from "./storage";
+import { createList, manageCurrentProject, projects } from "./storage";
 import { dateManager } from "./dates";
 import { openModal, closeModal } from "./util";
 import { createProjectElement, editProjectForm } from "./create-html-elements";
-import { setCurrentProject } from "./index";
+import { renderTasks } from "./task";
 
 const createProject = () => {
   let name = "";
@@ -51,32 +51,79 @@ const createProject = () => {
 };
 
 function renderProjects(projects) {
-  const projContainer = document.querySelector("#project-container");
-  projContainer.innerHTML = "";
+  const projectContainer = document.querySelector("#project-container");
+  projectContainer.innerHTML = "";
 
   for (
     projects.front();
     projects.currPos() < projects.length();
     projects.next()
   ) {
-    let projObject = projects.getElement();
-    let projElement = createProjectElement(projObject);
-    let deleteBtn = projElement.children.item(3);
+    let projectObject = projects.getElement();
+    let projectElement = createProjectElement(projectObject);
+    let deleteBtn = projectElement.children.item(3);
 
     deleteBtn.addEventListener("click", function (event) {
       removeProject(event, projects);
     });
-    addEventListenerToProjects(projObject, projElement);
-    projContainer.appendChild(projElement);
+
+    addEventListenerToProjects(projectObject, projectElement);
+    projectContainer.appendChild(projectElement);
   }
 }
 
-function addEventListenerToProjects(projectObj, projectElement) {
+function addEventListenerToProjects(projectObject, projectElement) {
   projectElement.addEventListener("click", function () {
-    manageCurrentProject.set(projectObj);
-    renderTasks(projectObj);
-    projectElement.addEventListener("dblclick", editProjectInfo);
+    manageCurrentProject.setProject(projectObject);
+    renderTasks(manageCurrentProject.getProject());
+  });
+
+  projectElement.addEventListener("dblclick", function () {
+    editProjectInfo(projectObject);
   });
 }
 
-export { createProject, renderProjects };
+function editProjectInfo(projectObject) {
+  const form = editProjectForm(projectObject);
+  openModal(form);
+
+  const cancelBtn = document.querySelector("#btn-cancel-editProjForm");
+  const updateBtn = document.querySelector("#btn-update-editProjForm");
+
+  cancelBtn.addEventListener("click", closeModal);
+  updateBtn.addEventListener("click", function () {
+    applyProjectFormInfo(form, projectObject);
+    renderProjects(projects);
+    closeModal();
+  });
+}
+
+function applyProjectFormInfo(form, projectObject) {
+  const projectName = form.children.item(0).value;
+  const projectDescription = form.children.item(1).value;
+  const noName = "Unnamed";
+  const noDescription = "No description";
+
+  projectName == ""
+    ? projectObject.setName(noName)
+    : projectObject.setName(projectName);
+  projectDescription == ""
+    ? projectObject.setDescription(noDescription)
+    : projectObject.setDescription(projectDescription);
+}
+
+function removeProject(event, projects) {
+  const projectsContainer = document.querySelector("#project-container");
+  const activeProjectElement = event.target.parentNode;
+  let activeProjectsIndex = Array.prototype.indexOf.call(
+    projectsContainer.children,
+    activeProjectElement
+  );
+
+  projects.moveTo(activeProjectsIndex);
+  projects.remove(projects.getElement());
+  projectsContainer.removeChild(activeProjectElement);
+  renderProjects(projects);
+}
+
+export { createProject, renderProjects, applyProjectFormInfo };

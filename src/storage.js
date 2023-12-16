@@ -132,15 +132,15 @@ const createList = function () {
 const projects = createList();
 const manageCurrentProject = (function () {
   let currentProject;
-  function set(project) {
+  function setProject(project) {
     currentProject = project;
   }
 
-  function get() {
+  function getProject() {
     return currentProject;
   }
 
-  return { set, get };
+  return { setProject, getProject };
 })();
 
 export { createList, manageCurrentProject, projects };

@@ -185,15 +185,15 @@ const editProjectForm = (project) => {
   const body = document.createElement("div");
   const projName = document.createElement("input");
   const projDescription = document.createElement("textarea");
-  const submit = document.createElement("button");
+  const updateBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   const NO_DESC = "No description";
   const NO_NAME = "Unnamed";
 
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editProjForm";
-  submit.textContent = "Update";
-  submit.id = "btn-submit-editProjForm";
+  updateBtn.textContent = "Update";
+  updateBtn.id = "btn-update-editProjForm";
   projName.maxLength = 30;
   projDescription.maxLength = 75;
 
@@ -211,7 +211,7 @@ const editProjectForm = (project) => {
 
   body.appendChild(projName);
   body.appendChild(projDescription);
-  body.appendChild(submit);
+  body.appendChild(updateBtn);
   body.appendChild(cancelBtn);
 
   return body;

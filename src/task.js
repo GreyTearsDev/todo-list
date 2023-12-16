@@ -106,6 +106,7 @@ function editTaskInfo(event, project) {
   let index = getTaskIndex(currentTask, taskContainer);
   let task = getTaskObject(project, index);
   const form = editTaskForm(task);
+  console.log(form);
 
   openModal(form);
   const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");
