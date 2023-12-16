@@ -3,14 +3,13 @@ import {
   createProjectElement,
   newProjectForm,
   newTaskForm,
-  createMessageElement,
   editProjectForm,
 } from "./create-html-elements";
 import "./style.css";
 import { createProject } from "./project";
 import { createTask, renderTasks, applyTaskFormInfo } from "./task";
 import { createList } from "./storage";
-import { openModal, closeModal } from "./util";
+import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
   createMainLayoutElements();
@@ -33,14 +32,14 @@ import { openModal, closeModal } from "./util";
     const cancelBtn = document.querySelector("#btn-cancel-form");
 
     submitBtn.addEventListener("click", function () {
-      renderProjects();
+      renderProjects(projects);
       const project = createProject();
 
       applyProjectFormInfo(form, project);
       projects.append(project);
       currentProject = project;
       closeModal();
-      renderProjects();
+      renderProjects(projects);
     });
 
     cancelBtn.addEventListener("click", closeModal);
@@ -76,7 +75,7 @@ import { openModal, closeModal } from "./util";
     });
   }
 
-  function removeProject(event) {
+  function removeProject(event, projects) {
     const projContainer = document.querySelector("#project-container");
     const currProjElement = event.target.parentNode;
     let index = Array.prototype.indexOf.call(
@@ -87,10 +86,10 @@ import { openModal, closeModal } from "./util";
     projects.remove(projects.getElement());
 
     projContainer.removeChild(currProjElement);
-    renderProjects();
+    renderProjects(projects);
   }
 
-  function renderProjects() {
+  function renderProjects(projects) {
     const projContainer = document.querySelector("#project-container");
     projContainer.innerHTML = "";
 
@@ -103,16 +102,18 @@ import { openModal, closeModal } from "./util";
       let projElement = createProjectElement(projObject);
       let deleteBtn = projElement.children.item(3);
 
-      deleteBtn.addEventListener("click", removeProject);
+      deleteBtn.addEventListener("click", function (event) {
+        removeProject(event, projects);
+      });
       addEventListenerToProjects(projObject, projElement);
       projContainer.appendChild(projElement);
     }
   }
 
-  function displayModalMessage(title, msg) {
-    const message = createMessageElement(title, msg);
-    return message;
-  }
+  // function displayModalMessage(title, msg) {
+  //   const message = createMessageElement(title, msg);
+  //   return message;
+  // }
 
   function editProjectInfo() {
     const form = editProjectForm(currentProject);
@@ -125,7 +126,7 @@ import { openModal, closeModal } from "./util";
     submitBtn.addEventListener("click", function () {
       applyProjectFormInfo(form, currentProject);
       closeModal();
-      renderProjects();
+      renderProjects(projects);
     });
   }
 

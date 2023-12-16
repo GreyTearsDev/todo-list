@@ -1,3 +1,5 @@
+import { createMessageElement } from "./create-html-elements";
+
 function openModal(...content) {
   const modal = document.getElementById("general-modal");
   content.forEach((element) => modal.appendChild(element));
@@ -12,4 +14,9 @@ const closeModal = () => {
   modalContainer.removeChild(modalContainer.firstChild);
 };
 
-export { openModal, closeModal };
+const displayModalMessage = (title, msg) => {
+  const message = createMessageElement(title, msg);
+  return message;
+};
+
+export { openModal, closeModal, displayModalMessage };
