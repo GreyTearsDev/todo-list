@@ -1,14 +1,13 @@
 import {
   createMainLayoutElements,
-  createProjectElement,
   newProjectForm,
   newTaskForm,
   editProjectForm,
 } from "./create-html-elements";
 import "./style.css";
-import { createProject } from "./project";
+import { createProject, renderProjects } from "./project";
 import { createTask, renderTasks, applyTaskFormInfo } from "./task";
-import { createList } from "./storage";
+import { manageCurrentProject, projects } from "./storage";
 import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
@@ -16,8 +15,8 @@ import { openModal, closeModal, displayModalMessage } from "./util";
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
-  const projects = createList();
-  let currentProject;
+  // const projects = createList();
+  // let currentProject;
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
@@ -37,7 +36,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 
       applyProjectFormInfo(form, project);
       projects.append(project);
-      currentProject = project;
+      manageCurrentProject.set(project);
       closeModal();
       renderProjects(projects);
     });
@@ -67,14 +66,6 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     cancelBtn.addEventListener("click", closeModal);
   });
 
-  function addEventListenerToProjects(projectObj, projectElement) {
-    projectElement.addEventListener("click", function () {
-      currentProject = projectObj;
-      renderTasks(projectObj);
-      projectElement.addEventListener("dblclick", editProjectInfo);
-    });
-  }
-
   function removeProject(event, projects) {
     const projContainer = document.querySelector("#project-container");
     const currProjElement = event.target.parentNode;
@@ -89,34 +80,29 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     renderProjects(projects);
   }
 
-  function renderProjects(projects) {
-    const projContainer = document.querySelector("#project-container");
-    projContainer.innerHTML = "";
+  // function renderProjects(projects) {
+  //   const projContainer = document.querySelector("#project-container");
+  //   projContainer.innerHTML = "";
 
-    for (
-      projects.front();
-      projects.currPos() < projects.length();
-      projects.next()
-    ) {
-      let projObject = projects.getElement();
-      let projElement = createProjectElement(projObject);
-      let deleteBtn = projElement.children.item(3);
+  //   for (
+  //     projects.front();
+  //     projects.currPos() < projects.length();
+  //     projects.next()
+  //   ) {
+  //     let projObject = projects.getElement();
+  //     let projElement = createProjectElement(projObject);
+  //     let deleteBtn = projElement.children.item(3);
 
-      deleteBtn.addEventListener("click", function (event) {
-        removeProject(event, projects);
-      });
-      addEventListenerToProjects(projObject, projElement);
-      projContainer.appendChild(projElement);
-    }
-  }
-
-  // function displayModalMessage(title, msg) {
-  //   const message = createMessageElement(title, msg);
-  //   return message;
+  //     deleteBtn.addEventListener("click", function (event) {
+  //       removeProject(event, projects);
+  //     });
+  //     addEventListenerToProjects(projObject, projElement);
+  //     projContainer.appendChild(projElement);
+  //   }
   // }
 
   function editProjectInfo() {
-    const form = editProjectForm(currentProject);
+    const form = editProjectForm(manageCurrentProject.get());
     openModal(form);
 
     const cancelBtn = document.querySelector("#btn-cancel-editProjForm");
@@ -142,12 +128,3 @@ import { openModal, closeModal, displayModalMessage } from "./util";
       : project.setDescription(projDesc);
   }
 })();
-
-//todo
-/* 
-
-display the appropriate date when editing tasks
-fix bug duplicating tasks when submit button in forum is clicked
-
-
-*/
