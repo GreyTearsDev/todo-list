@@ -27,6 +27,14 @@ select {
   font: inherit;
 }
 
+button {
+  all: unset;
+}
+
+button:focus {
+  outline: revert;
+}
+
 p,
 h1,
 h2,
@@ -72,6 +80,7 @@ main {
   grid-area: main;
 }
 
+/*========MODAL=========*/
 .modal {
   display: none;
   position: fixed;
@@ -93,24 +102,44 @@ main {
   max-width: 10vw;
 }
 
+/*=======BUTTONS=======*/
+button {
+  background-color: var(--modal-bg-color);
+  padding: 0.3rem 1rem;
+}
+
+/*==========HEADER==========*/
 header {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/*========SIDEBAR=========*/
 aside {
   border-top: 1px solid blue;
-  padding: 2vh 5%;
+  padding: 2vh 10%;
   display: grid;
   gap: 1vh;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
 }
 
+/*======PROJECT CONTAINER========*/
 #project-container {
-  border: 1px solid red;
+  border: 1px solid rgb(217, 255, 0);
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 1.5vh;
+}
+
+/*========PROJECT ELEMENT========*/
+.project {
+  border: 1px solid blue;
+  border-radius: 20px;
+  padding: 5% 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2%;
 }

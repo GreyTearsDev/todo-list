@@ -84,7 +84,7 @@ const createProjectElement = (project) => {
   const dateInfo = document.createElement("p");
   const deleteBtn = document.createElement("button");
 
-  deleteBtn.textContent = "x";
+  deleteBtn.textContent = "Delete";
   deleteBtn.id = "btn-delete-project";
   name.textContent = project.getName();
   description.textContent = project.getDescription();
