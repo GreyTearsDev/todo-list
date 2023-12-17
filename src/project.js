@@ -1,8 +1,8 @@
 import { createList } from "./storage";
 import { dateManager } from "./dates";
 import { openModal, closeModal } from "./util";
-import { createProjectElement, editProjectForm } from "./create-html-elements";
-import { renderTasks } from "./task";
+import { createProjectElement, editProjectForm } from "./html-elements";
+import { renderTasks, createTask } from "./task";
 
 const projects = createList();
 const manageCurrentProject = (function () {
@@ -17,6 +17,23 @@ const manageCurrentProject = (function () {
 
   return { setProject, getProject };
 })();
+
+function loadDefaultProjects() {
+  const proj1 = createProject();
+  const proj1Task1 = createTask();
+
+  proj1.setName("Learn Programming");
+  proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
+  proj1Task1.setTitle("Finish javascript course");
+  proj1Task1.setDescription(
+    "Complete all projects and learn as much as possible"
+  );
+  proj1Task1.setPriority("Mid");
+  proj1Task1.taskDates.setDueDate("2024, 01, 31");
+  proj1.addTask(proj1Task1);
+  projects.append(proj1);
+  renderProjects(projects);
+}
 
 const createProject = () => {
   let name = "";
@@ -79,6 +96,7 @@ function renderProjects(projects) {
 
     deleteBtn.addEventListener("click", function (event) {
       removeProject(event, projects);
+      renderTasks(projects.getElement());
     });
 
     addEventListenerToProjects(projectObject, projectElement);
@@ -89,7 +107,7 @@ function renderProjects(projects) {
 function addEventListenerToProjects(projectObject, projectElement) {
   projectElement.addEventListener("click", function () {
     manageCurrentProject.setProject(projectObject);
-    renderTasks(manageCurrentProject.getProject());
+    renderTasks(projectObject);
   });
 
   projectElement.addEventListener("dblclick", function () {
@@ -136,6 +154,7 @@ function removeProject(event, projects) {
 
   projects.moveTo(activeProjectsIndex);
   projects.remove(projects.getElement());
+
   projectsContainer.removeChild(activeProjectElement);
   renderProjects(projects);
 }
@@ -146,4 +165,5 @@ export {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
+  loadDefaultProjects,
 };

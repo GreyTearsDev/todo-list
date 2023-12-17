@@ -2,7 +2,7 @@ import {
   createMainLayoutElements,
   newProjectForm,
   newTaskForm,
-} from "./create-html-elements";
+} from "./html-elements";
 import "./style.css";
 import {
   createProject,
@@ -10,6 +10,7 @@ import {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
+  loadDefaultProjects,
 } from "./project";
 import { createTask, renderTasks, applyTaskFormInfo } from "./task";
 import { openModal, closeModal, displayModalMessage } from "./util";
@@ -19,6 +20,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
+  // loadDefaultProjects();
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
@@ -33,14 +35,14 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     const cancelBtn = document.querySelector("#btn-cancel-form");
 
     submitBtn.addEventListener("click", function () {
-      renderProjects(projects);
       const project = createProject();
 
+      manageCurrentProject.setProject(project);
       applyProjectFormInfo(form, project);
       projects.append(project);
-      manageCurrentProject.setProject(project);
       closeModal();
       renderProjects(projects);
+      renderTasks(manageCurrentProject.getProject());
     });
 
     cancelBtn.addEventListener("click", closeModal);
@@ -68,3 +70,8 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     cancelBtn.addEventListener("click", closeModal);
   });
 })();
+
+/*to do
+
+
+remove tasks when the las t project is deleted*/

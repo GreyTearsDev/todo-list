@@ -1,5 +1,5 @@
 import { dateManager } from "./dates";
-import { createTaskElement, editTaskForm } from "./create-html-elements";
+import { createTaskElement, editTaskForm } from "./html-elements";
 import { openModal, closeModal } from "./util";
 
 const createTask = () => {
@@ -106,7 +106,6 @@ function editTaskInfo(event, project) {
   let index = getTaskIndex(currentTask, taskContainer);
   let task = getTaskObject(project, index);
   const form = editTaskForm(task);
-  console.log(form);
 
   openModal(form);
   const cancelBtn = document.querySelector("#btn-cancel-editTaskForm");

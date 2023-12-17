@@ -79,19 +79,19 @@ const createAddProjectButton = () => {
 
 const createProjectElement = (project) => {
   const body = document.createElement("div");
-  const title = document.createElement("h4");
+  const name = document.createElement("h4");
   const description = document.createElement("p");
   const dateInfo = document.createElement("p");
   const deleteBtn = document.createElement("button");
 
   deleteBtn.textContent = "x";
   deleteBtn.id = "btn-delete-project";
-  title.textContent = project.getName();
+  name.textContent = project.getName();
   description.textContent = project.getDescription();
   dateInfo.textContent = `Created on ${project.projectDates.getCreationDate()}`;
 
   body.className = "project";
-  body.appendChild(title);
+  body.appendChild(name);
   body.appendChild(description);
   body.appendChild(dateInfo);
   body.appendChild(deleteBtn);

@@ -1,4 +1,4 @@
-import { createMessageElement } from "./create-html-elements";
+import { createMessageElement } from "./html-elements";
 
 function openModal(...content) {
   const modal = document.getElementById("general-modal");
