@@ -20,7 +20,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
-  // loadDefaultProjects();
+  loadDefaultProjects();
 
   window.addEventListener("click", function () {
     if (this.event.target == modal) {

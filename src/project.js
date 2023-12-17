@@ -33,6 +33,7 @@ function loadDefaultProjects() {
   proj1.addTask(proj1Task1);
   projects.append(proj1);
   renderProjects(projects);
+  renderTasks(proj1);
 }
 
 const createProject = () => {
