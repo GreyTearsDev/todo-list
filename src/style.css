@@ -2,6 +2,7 @@
 /*by: Josh Comeau
 https://www.joshwcomeau.com/css/custom-css-reset/
 */
+
 *,
 *::after,
 *::before {
@@ -11,6 +12,7 @@ https://www.joshwcomeau.com/css/custom-css-reset/
 * {
   padding: 0;
   margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
