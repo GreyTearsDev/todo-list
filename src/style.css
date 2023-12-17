@@ -108,3 +108,10 @@ aside {
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
 }
+
+#project-container {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 250px;
+}

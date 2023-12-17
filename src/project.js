@@ -32,6 +32,7 @@ function loadDefaultProjects() {
   proj1Task1.taskDates.setDueDate("2024, 01, 31");
   proj1.addTask(proj1Task1);
   projects.append(proj1);
+  manageCurrentProject.setProject(proj1);
   renderProjects(projects);
   renderTasks(proj1);
 }
@@ -157,6 +158,7 @@ function removeProject(event, projects) {
   projects.remove(projects.getElement());
 
   projectsContainer.removeChild(activeProjectElement);
+  renderTasks();
   renderProjects(projects);
 }
 
