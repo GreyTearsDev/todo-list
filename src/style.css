@@ -86,7 +86,6 @@ main {
 
 .modal > div {
   background-color: var(--main-color);
-  transform: translateY(-100%);
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
