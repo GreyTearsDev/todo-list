@@ -133,7 +133,7 @@ const createHeaderElement = () => {
 };
 
 const createSideBarElement = () => {
-  const sideBar = document.createElement("side");
+  const sideBar = document.createElement("aside");
   const btnCreateProject = createAddProjectButton();
   const projectsContainer = document.createElement("div");
 

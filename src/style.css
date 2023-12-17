@@ -57,22 +57,18 @@ h6 {
   grid-template-rows: minmax(80px, 4vh) 1fr;
   grid-template-areas:
     "header header"
-    "nav main";
+    "aside main";
 }
 
-.main-div > * {
-  border: 1px solid rgb(241, 11, 11);
-}
-
-.main-div > header {
+header {
   grid-area: header;
 }
 
-.main-div > nav {
-  grid-area: nav;
+aside {
+  grid-area: aside;
 }
 
-.main-div > main {
+main {
   grid-area: main;
 }
 
@@ -102,4 +98,13 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+aside {
+  border-top: 1px solid blue;
+  padding: 2vh 5%;
+  display: grid;
+  gap: 1vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
 }
