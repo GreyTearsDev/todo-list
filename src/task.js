@@ -1,5 +1,6 @@
 import { dateManager } from "./dates";
 import { createTaskElement, editTaskForm } from "./html-elements";
+import { manageCurrentProject } from "./project";
 import { openModal, closeModal } from "./util";
 
 const createTask = () => {

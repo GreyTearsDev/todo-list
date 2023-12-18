@@ -98,19 +98,20 @@ function renderProjects(projects) {
     let projectElement = createProjectElement(projectObject);
     let deleteBtn = projectElement.children.item(3);
 
+    addEventListenerToProjects(projectObject, projectElement);
+    projectContainer.appendChild(projectElement);
+    manageCurrentProject.setProject(projectObject);
+
     deleteBtn.addEventListener("click", function (event) {
       removeProject(event, projects);
       renderTasks(projects.getElement());
     });
-
-    addEventListenerToProjects(projectObject, projectElement);
-    projectContainer.appendChild(projectElement);
   }
 }
 
 function addEventListenerToProjects(projectObject, projectElement) {
   projectElement.addEventListener("click", function () {
-    manageCurrentProject.setProject(projectObject);
+    console.log(manageCurrentProject.getProject());
     renderTasks(projectObject);
   });
 
@@ -158,9 +159,8 @@ function removeProject(event, projects) {
 
   projects.moveTo(activeProjectsIndex);
   projects.remove(projects.getElement());
-
   projectsContainer.removeChild(activeProjectElement);
-  renderTasks();
+  manageCurrentProject.setProject(undefined);
   renderProjects(projects);
 }
 
