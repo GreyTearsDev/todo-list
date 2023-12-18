@@ -143,6 +143,10 @@ button:hover {
   box-shadow: var(--shadow-elevation-medium);
 }
 
+button:active {
+  transform: scale(95%);
+}
+
 /*==========HEADER==========*/
 header {
   display: flex;
