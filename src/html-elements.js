@@ -65,14 +65,14 @@ const createMessageElement = (title, message) => {
 
 const createAddTaskButton = () => {
   const btn = document.createElement("button");
-  btn.textContent = "Add New Task";
+  btn.textContent = "+ Task";
   btn.id = "btn-new-task";
   return btn;
 };
 
 const createAddProjectButton = () => {
   const btn = document.createElement("button");
-  btn.textContent = "New Project";
+  btn.textContent = "+Project";
   btn.id = "btn-create-project";
   return btn;
 };
@@ -151,8 +151,9 @@ const createMainElement = () => {
   const taskContainer = document.createElement("div");
   const btnNewTask = createAddTaskButton();
 
+  btnNewTask.id = "add-new-task";
   taskContainer.id = "task-container";
-  taskContainer.appendChild(btnNewTask);
+  main.appendChild(btnNewTask);
   main.appendChild(taskContainer);
 
   return main;

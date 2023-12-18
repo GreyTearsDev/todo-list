@@ -125,14 +125,14 @@ main {
 
 /*=======BUTTONS=======*/
 button {
-  background-color: var(--priority-low);
+  background-color: var(--project-border-color);
   padding: 0.3rem 1rem;
-  border-radius: 0.6rem;
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  color: black;
+  color: var(--main-color);
   transition-property: transform;
   transition-duration: 200ms;
 }
@@ -163,6 +163,9 @@ aside {
 
 main {
   background-color: var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  padding: 2vh 2vw;
 }
 
 /*======PROJECT CONTAINER========*/
@@ -208,10 +211,43 @@ main {
 .project > h3 {
 }
 
-#btn-delete-project {
+#btn-delete-projec {
   width: 35%;
+  transition: transform, background-color;
+  transition-duration: 100ms;
 }
 
 #btn-delete-project:hover {
   background-color: var(--priority-high);
+  transform: scale(104%);
+}
+
+/*=======TASK CONTAINER========*/
+
+#task-container {
+  display: flex;
+  padding: 2vh 0vw;
+}
+
+/*======TASK======*/
+
+.body-task {
+  background-color: var(--main-color);
+  border: 2px solid var(--project-border-color);
+  border-radius: 20px;
+  padding: 5% 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4%;
+  box-shadow: var(--shadow-elevation-low);
+  transition-property: transform;
+  transition-duration: 100ms;
+}
+
+/*======MAIN=======*/
+#add-new-task {
+  justify-self: center;
+  width: 9vw;
+  margin-top: 2vh;
 }
