@@ -54,27 +54,27 @@ h6 {
   --accent-color: #f1cffc;
   --main-color: #ffffff;
   --modal-bg-color: #c29cff6e;
+
+  --project-border-color: #000;
 }
 
 :root {
-  --shadow-color: 286deg 36% 56%;
-  --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.21),
-    0.4px 0.8px 1.1px -0.8px hsl(var(--shadow-color) / 0.27),
-    0.9px 1.9px 2.6px -1.7px hsl(var(--shadow-color) / 0.34);
-  --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.17),
-    0.7px 1.5px 2.1px -0.4px hsl(var(--shadow-color) / 0.21),
-    1.4px 2.7px 3.8px -0.8px hsl(var(--shadow-color) / 0.24),
-    2.6px 5.1px 7.1px -1.3px hsl(var(--shadow-color) / 0.27),
-    4.7px 9.5px 13.2px -1.7px hsl(var(--shadow-color) / 0.31);
-  --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
-    1.5px 3px 4.2px -0.2px hsl(var(--shadow-color) / 0.2),
-    2.6px 5.3px 7.3px -0.4px hsl(var(--shadow-color) / 0.22),
-    4px 7.9px 11px -0.6px hsl(var(--shadow-color) / 0.24),
-    5.7px 11.4px 15.9px -0.8px hsl(var(--shadow-color) / 0.25),
-    8.2px 16.3px 22.7px -1.1px hsl(var(--shadow-color) / 0.27),
-    11.6px 23.1px 32.2px -1.3px hsl(var(--shadow-color) / 0.29),
-    16.2px 32.4px 45.1px -1.5px hsl(var(--shadow-color) / 0.31),
-    22.3px 44.5px 62px -1.7px hsl(var(--shadow-color) / 0.33);
+  --shadow-color: 0deg 0% 71%;
+  --shadow-elevation-low: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.29),
+    0.4px 0.8px 1px -1.4px hsl(var(--shadow-color) / 0.27),
+    0.9px 1.8px 2.2px -2.8px hsl(var(--shadow-color) / 0.25);
+  --shadow-elevation-medium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.31),
+    0.7px 1.4px 1.7px -0.9px hsl(var(--shadow-color) / 0.29),
+    1.8px 3.6px 4.3px -1.9px hsl(var(--shadow-color) / 0.27),
+    4.4px 8.8px 10.6px -2.8px hsl(var(--shadow-color) / 0.25);
+  --shadow-elevation-high: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.29),
+    1px 2.1px 2.5px -0.4px hsl(var(--shadow-color) / 0.28),
+    1.9px 3.8px 4.6px -0.8px hsl(var(--shadow-color) / 0.27),
+    3.2px 6.4px 7.7px -1.2px hsl(var(--shadow-color) / 0.26),
+    5.2px 10.5px 12.6px -1.6px hsl(var(--shadow-color) / 0.25),
+    8.3px 16.6px 19.9px -2px hsl(var(--shadow-color) / 0.24),
+    12.8px 25.6px 30.7px -2.4px hsl(var(--shadow-color) / 0.23),
+    19px 38px 45.6px -2.8px hsl(var(--shadow-color) / 0.23);
 }
 
 .main-div {
@@ -175,7 +175,7 @@ main {
 /*========PROJECT ELEMENT========*/
 .project {
   background-color: var(--main-color);
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--project-border-color);
   border-radius: 20px;
   padding: 5% 2%;
   display: flex;
@@ -189,6 +189,7 @@ main {
 
 .project:hover {
   transform: scale(104%);
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 #btn-create-project {
