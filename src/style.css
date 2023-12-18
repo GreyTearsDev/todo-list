@@ -195,8 +195,15 @@ main {
   box-shadow: var(--shadow-elevation-medium);
 }
 
-#btn-create-project {
+#btn-create-project,
+#add-new-task {
   box-shadow: var(--shadow-elevation-low);
+}
+
+#btn-create-project:hover,
+#add-new-task:hover {
+  background-color: var(--priority-low);
+  color: var(--project-border-color);
 }
 
 .project > p {
