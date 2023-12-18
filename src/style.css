@@ -213,4 +213,5 @@ main {
 }
 
 #btn-delete-project:hover {
+  background-color: var(--priority-high);
 }
