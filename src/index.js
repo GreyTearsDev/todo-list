@@ -1,3 +1,5 @@
+// Importing necessary functions and styles from other files
+
 import {
   createMainLayoutElements,
   newProjectForm,
@@ -17,11 +19,13 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
   createMainLayoutElements();
-  // loadDefaultProjects();
+  loadDefaultProjects();
+
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
 
+  // Adding a click event listener to the window to close the modal when clicked outside
   window.addEventListener("click", function () {
     if (this.event.target == modal) {
       closeModal();
@@ -37,11 +41,15 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     submitBtn.addEventListener("click", function () {
       const project = createProject();
 
+      // Setting the current project to the newly created project
       manageCurrentProject.setProject(project);
+
+      // Applying form information to the project
       applyProjectFormInfo(form, project);
       projects.append(project);
-
       closeModal();
+
+      // Rendering the updated list of projects and the tasks for the current project
       renderProjects(projects);
       renderTasks(manageCurrentProject.getProject());
     });
@@ -50,6 +58,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
   });
 
   taskBtn.addEventListener("click", function () {
+    // Checking if a project has been created before creating a task
     if (manageCurrentProject.getProject() == undefined) {
       let message = displayModalMessage("Empty list!", "Create project first!");
       openModal(message);
@@ -63,6 +72,8 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 
     submitBtn.addEventListener("click", function () {
       const task = createTask();
+
+      // Applying form information to the task and associating it with the current project
       applyTaskFormInfo(form, task, manageCurrentProject.getProject());
       renderTasks(manageCurrentProject.getProject());
       closeModal();
@@ -71,10 +82,3 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     cancelBtn.addEventListener("click", closeModal);
   });
 })();
-
-/*to do
-
-
-Fix bug causing new tasks to be added to ghost projects
-
-*/

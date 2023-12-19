@@ -18,26 +18,30 @@ const manageCurrentProject = (function () {
   return { setProject, getProject };
 })();
 
-// function loadDefaultProjects() {
-//   const proj1 = createProject();
-//   const proj1Task1 = createTask();
+// Function to load default projects on page load
+function loadDefaultProjects() {
+  const proj1 = createProject();
+  const proj1Task1 = createTask();
 
-//   proj1.setName("Learn Programming");
-//   proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
-//   proj1Task1.setTitle("Finish javascript course");
-//   proj1Task1.setDescription(
-//     "Complete all projects and learn as much as possible"
-//   );
-//   proj1Task1.setPriority("Mid");
-//   proj1Task1.taskDates.setDueDate("2024, 01, 31");
-//   proj1.addTask(proj1Task1);
-//   projects.append(proj1);
+  proj1.setName("Learn Programming");
+  proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
+  proj1Task1.setTitle("Finish javascript course");
+  proj1Task1.setDescription(
+    "Complete all projects and learn as much as possible"
+  );
+  proj1Task1.setPriority("Mid");
+  proj1Task1.taskDates.setDueDate("2024, 01, 31");
+  proj1.addTask(proj1Task1);
+  projects.append(proj1);
 
-//   manageCurrentProject.setProject(proj1);
+  // Setting the current project
 
-//   renderProjects(projects);
-//   // renderTasks(proj1);
-// }
+  manageCurrentProject.setProject(proj1);
+
+  // Rendering projects and tasks on the page
+  renderProjects(projects);
+  renderTasks(proj1);
+}
 
 const createProject = () => {
   let name = "";
@@ -85,10 +89,12 @@ const createProject = () => {
   };
 };
 
+// Function to render projects on the page
 function renderProjects(projects) {
   const projectContainer = document.querySelector("#project-container");
-  projectContainer.innerHTML = "";
+  projectContainer.innerHTML = ""; // Clearing the existing content in the project container
 
+  // Iterating through the projects list
   for (
     projects.front();
     projects.currPos() < projects.length();
@@ -97,8 +103,6 @@ function renderProjects(projects) {
     let projectObject = projects.getElement();
     let projectElement = createProjectElement(projectObject);
     let deleteBtn = projectElement.children.item(3);
-
-    console.log(projectObject.getTasks());
 
     addEventListenerToProjects(projectObject, projectElement);
     projectContainer.appendChild(projectElement);
@@ -114,7 +118,6 @@ function addEventListenerToProjects(projectObject, projectElement) {
   projectElement.addEventListener("click", function () {
     manageCurrentProject.setProject(projectObject);
     renderTasks(projectObject);
-    console.log(projectObject.getTasks().length);
   });
 
   projectElement.addEventListener("dblclick", function () {
@@ -154,14 +157,19 @@ function applyProjectFormInfo(form, projectObject) {
 function removeProject(event, projects) {
   const projectsContainer = document.querySelector("#project-container");
   const activeProjectElement = event.target.parentNode;
+
+  // Finding the index of the clicked project in the projects list
   let activeProjectsIndex = Array.prototype.indexOf.call(
     projectsContainer.children,
     activeProjectElement
   );
 
+  // Moving the projects list to the clicked project index and removing the project
   projects.moveTo(activeProjectsIndex);
   projects.remove(projects.getElement());
+  // Moving the projects list to the clicked project index and removing the project
   projectsContainer.removeChild(activeProjectElement);
+  // Resetting the current project and rendering projects
   manageCurrentProject.setProject(undefined);
   renderProjects(projects);
 }
@@ -172,5 +180,5 @@ export {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
-  // loadDefaultProjects,
+  loadDefaultProjects,
 };

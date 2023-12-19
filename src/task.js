@@ -56,15 +56,18 @@ const createTask = () => {
   };
 };
 
+// Function to get the index of a task within its container
 const getTaskIndex = (task, container) => {
   let index = Array.prototype.indexOf.call(container.children, task);
   return index;
 };
 
+// Function to get the task object from the project using its index
 const getTaskObject = (project, index) => {
   return project.getTasks()[index - 1];
 };
 
+// Function to remove a task from the project
 const removeTask = (event, project) => {
   let taskContainer = event.target.parentNode.parentNode;
   let currentTask = event.target.parentNode;
@@ -73,19 +76,19 @@ const removeTask = (event, project) => {
   project.removeTask(taskObject);
 };
 
+// Function to render tasks for a given project
 function renderTasks(project) {
   const taskContainer = document.getElementById("task-container");
-  let [...nodes] = taskContainer.childNodes;
+  let [...nodes] = taskContainer.childNodes; // Getting a copy of the child nodes in the task container
 
   if (project === undefined) return;
 
-  //clean the container before rendering
+  // Cleaning the container before rendering
   for (let i = 0; i < nodes.length; ++i) {
-    // if (i == 0) continue;
     taskContainer.removeChild(nodes[i]);
   }
 
-  // create a task element for each task object stored in the project
+  // Creating a task element for each task object stored in the project
   for (let task of project.getTasks()) {
     let newTask = createTaskElement(task);
     addEventListenerToTasks(newTask, project);
@@ -93,6 +96,7 @@ function renderTasks(project) {
   }
 }
 
+// Function to add event listeners to task elements
 function addEventListenerToTasks(task, project) {
   const deleteBtn = task.children.item(5);
 
@@ -105,6 +109,7 @@ function addEventListenerToTasks(task, project) {
   });
 }
 
+// Function to edit task information using a modal form
 function editTaskInfo(event, project) {
   let taskContainer = event.target.parentNode.parentNode;
   let currentTask = event.target.parentNode;
@@ -125,6 +130,7 @@ function editTaskInfo(event, project) {
   });
 }
 
+// Function to apply form information to a task
 function applyTaskFormInfo(form, task, project) {
   const taskTitle = form.children.item(0).value;
   const taskPriority = form.children.item(2).value;
@@ -133,9 +139,11 @@ function applyTaskFormInfo(form, task, project) {
   const noTitle = "Untitled";
   const noDesc = "No description";
 
+  // Setting default values if inputs are empty
   taskTitle == "" ? task.setTitle(noTitle) : task.setTitle(taskTitle);
   taskDesc == "" ? task.setDescription(noDesc) : task.setDescription(taskDesc);
 
+  // Setting task due date, priority, and adding it back to the project
   if (taskDueDate != "") task.taskDates.setDueDate(taskDueDate);
   task.setPriority(taskPriority);
   project.addTask(task);
