@@ -235,8 +235,7 @@ main {
   transition-duration: 100ms;
 }
 
-#btn-delete-project:hover,
-.btn-delete-task:hover {
+#btn-delete-project:hover {
   color: var(--project-border-color);
   background-color: var(--priority-high);
 }
@@ -279,6 +278,11 @@ main {
 }
 #btn-completed {
   margin: 4px 0;
+}
+
+.btn-delete-task:hover {
+  background-color: var(--priority-low);
+  color: var(--project-border-color);
 }
 
 #btn-completed:hover {

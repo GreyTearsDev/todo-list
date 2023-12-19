@@ -31,7 +31,6 @@ function loadDefaultProjects() {
   );
   proj1Task1.setPriority("Mid");
   proj1Task1.taskDates.setDueDate("2024, 01, 31");
-  proj1.addTask(proj1Task1);
   projects.append(proj1);
 
   // Setting the current project
@@ -40,7 +39,6 @@ function loadDefaultProjects() {
 
   // Rendering projects and tasks on the page
   renderProjects(projects);
-  renderTasks(proj1);
 }
 
 const createProject = () => {
