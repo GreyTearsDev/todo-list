@@ -180,6 +180,7 @@ const newProjectForm = () => {
   const submit = document.createElement("button");
   const cancelBtn = document.createElement("button");
 
+  body.classList.add("form");
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-form";
   submit.textContent = "Create";
@@ -206,6 +207,7 @@ const editProjectForm = (project) => {
   const NO_DESC = "No description";
   const NO_NAME = "Unnamed";
 
+  body.classList.add("form");
   cancelBtn.textContent = "Cancel";
   cancelBtn.id = "btn-cancel-editProjForm";
   updateBtn.textContent = "Update";
@@ -256,6 +258,7 @@ const newTaskForm = () => {
   priorityInfo.textContent = "Priority";
   taskTitle.maxLength = 35;
   taskDescription.maxLength = 75;
+  body.classList.add("form");
 
   body.appendChild(taskTitle);
   body.appendChild(priorityInfo);
@@ -294,6 +297,7 @@ const editTaskForm = (task) => {
   priorityInfo.textContent = "Priority";
   console.log(task);
   prioritySelector.value = task.getPriority();
+  body.classList.add("form");
 
   if (task.taskDates.getDueDate() != "") {
     date.value = task.taskDates.getDueDate();

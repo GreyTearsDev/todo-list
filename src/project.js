@@ -18,29 +18,6 @@ const manageCurrentProject = (function () {
   return { setProject, getProject };
 })();
 
-// Function to load default projects on page load
-function loadDefaultProjects() {
-  const proj1 = createProject();
-  const proj1Task1 = createTask();
-
-  proj1.setName("Learn Programming");
-  proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
-  proj1Task1.setTitle("Finish javascript course");
-  proj1Task1.setDescription(
-    "Complete all projects and learn as much as possible"
-  );
-  proj1Task1.setPriority("Mid");
-  proj1Task1.taskDates.setDueDate("2024, 01, 31");
-  projects.append(proj1);
-
-  // Setting the current project
-
-  manageCurrentProject.setProject(proj1);
-
-  // Rendering projects and tasks on the page
-  renderProjects(projects);
-}
-
 const createProject = () => {
   let name = "";
   let description = "";
@@ -178,5 +155,4 @@ export {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
-  loadDefaultProjects,
 };

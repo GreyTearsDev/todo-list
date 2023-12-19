@@ -19,7 +19,6 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
   createMainLayoutElements();
-  loadDefaultProjects();
 
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
