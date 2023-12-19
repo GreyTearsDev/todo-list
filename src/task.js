@@ -101,6 +101,14 @@ function renderTasks(project) {
 // Function to add event listeners to task elements
 function addEventListenerToTasks(task, project) {
   const deleteBtn = task.children.item(5);
+  const doneBtn = task.children.item(4);
+
+  doneBtn.addEventListener("click", function (event) {
+    const taskIndex = getTaskIndex(task, task.parentNode);
+    const taskObject = getTaskObject(project, taskIndex);
+    taskObject.switchTaskStatus();
+    renderTasks(project);
+  });
 
   deleteBtn.addEventListener("click", function (event) {
     removeTask(event, project);

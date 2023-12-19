@@ -59,11 +59,11 @@ h6 {
 }
 
 :root {
-  --shadow-task: 2px 4px 10px rgba(0, 0, 0, 0.254);
-  --shadow-task-high: 2px 4px 15px rgba(0, 0, 0, 0.169);
+  --shadow-task: 2px 4px 15px rgba(0, 0, 0, 0.254);
+  --shadow-task-high: 2px 4px 18px rgba(0, 0, 0, 0.169);
 
-  --inset-base: inset 2px 4px 10px rgba(0, 0, 0, 0.254);
-  --inset-project: inset 2px 4px 10px rgba(0, 0, 0, 0.254);
+  --inset-base: inset 2px 4px 15px rgba(0, 0, 0, 0.12);
+  --inset-project: inset 2px 4px 15px rgba(0, 0, 0, 0.156);
 }
 
 .main-div {
@@ -191,8 +191,7 @@ main {
 
 .project:hover {
   transform: scale(104%);
-  box-shadow: var(--shadow-elevation-medium);
-  border: 1px solid var(--project-border-color);
+  box-shadow: var(--shadow-task-high);
 }
 
 #btn-create-project,
@@ -214,9 +213,6 @@ main {
 
 #date-info {
   font-size: 0.7rem;
-}
-
-.project > h3 {
 }
 
 #btn-delete-project,
@@ -263,18 +259,14 @@ main {
 #btn-completed,
 .btn-delete-task {
   width: 20%;
-  transition-property: color;
+  transition-property: colo, background-color;
   transition-duration: 100ms;
 }
 #btn-completed {
   margin: 4px 0;
 }
 
-.btn-delete-task:hover {
-  background-color: var(--priority-low);
-  color: var(--project-border-color);
-}
-
+.btn-delete-task:hover,
 #btn-completed:hover {
   background-color: var(--priority-low);
   color: var(--project-border-color);
@@ -290,6 +282,10 @@ main {
 
 .priority-high {
   background-color: var(--priority-high);
+}
+
+.task-done {
+  opacity: 0.5;
 }
 
 /*======MAIN=======*/
@@ -310,6 +306,7 @@ main {
 .form > input,
 .form > textarea {
   width: 90%;
+  padding: 5px;
 }
 
 .form > textarea {

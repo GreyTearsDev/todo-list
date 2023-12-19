@@ -8,6 +8,10 @@ const createTaskElement = (task) => {
   const dueDateInfo = document.createElement("p");
   const priority = document.createElement("h5");
 
+  if (task.getTaskStatus() == true) {
+    body.classList.add("task-done");
+  }
+
   switch (task.getPriority()) {
     case "Low":
       body.classList.add("priority-low", "body-task");
@@ -56,9 +60,9 @@ const createSelectPriorityElement = () => {
   opt2.textContent = "Mid";
   opt3.textContent = "Low";
 
-  select.appendChild(opt1);
-  select.appendChild(opt2);
   select.appendChild(opt3);
+  select.appendChild(opt2);
+  select.appendChild(opt1);
 
   return select;
 };
