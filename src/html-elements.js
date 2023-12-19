@@ -151,7 +151,6 @@ const createMainElement = () => {
   const taskContainer = document.createElement("div");
   const btnNewTask = createAddTaskButton();
 
-  btnNewTask.id = "add-new-task";
   taskContainer.id = "task-container";
   main.appendChild(btnNewTask);
   main.appendChild(taskContainer);

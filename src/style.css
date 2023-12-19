@@ -200,12 +200,12 @@ main {
 }
 
 #btn-create-project,
-#add-new-task {
+#btn-new-task {
   box-shadow: var(--shadow-elevation-low);
 }
 
 #btn-create-project:hover,
-#add-new-task:hover {
+#btn-new-task:hover {
   background-color: var(--priority-low);
   color: var(--project-border-color);
 }
@@ -257,7 +257,7 @@ main {
 }
 
 /*======MAIN=======*/
-#add-new-task {
+#btn-new-task {
   justify-self: center;
   width: 9vw;
   margin-top: 2vh;

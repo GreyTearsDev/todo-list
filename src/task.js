@@ -77,11 +77,15 @@ function renderTasks(project) {
   const taskContainer = document.getElementById("task-container");
   let [...nodes] = taskContainer.childNodes;
 
+  if (project === undefined) return;
+
+  //clean the container before rendering
   for (let i = 0; i < nodes.length; ++i) {
-    if (i == 0) continue;
+    // if (i == 0) continue;
     taskContainer.removeChild(nodes[i]);
   }
 
+  // create a task element for each task object stored in the project
   for (let task of project.getTasks()) {
     let newTask = createTaskElement(task);
     addEventListenerToTasks(newTask, project);

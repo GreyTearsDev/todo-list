@@ -18,26 +18,26 @@ const manageCurrentProject = (function () {
   return { setProject, getProject };
 })();
 
-function loadDefaultProjects() {
-  const proj1 = createProject();
-  const proj1Task1 = createTask();
+// function loadDefaultProjects() {
+//   const proj1 = createProject();
+//   const proj1Task1 = createTask();
 
-  proj1.setName("Learn Programming");
-  proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
-  proj1Task1.setTitle("Finish javascript course");
-  proj1Task1.setDescription(
-    "Complete all projects and learn as much as possible"
-  );
-  proj1Task1.setPriority("Mid");
-  proj1Task1.taskDates.setDueDate("2024, 01, 31");
-  proj1.addTask(proj1Task1);
-  projects.append(proj1);
+//   proj1.setName("Learn Programming");
+//   proj1.setDescription("Follow The Odin Project to become a full-stack Dev");
+//   proj1Task1.setTitle("Finish javascript course");
+//   proj1Task1.setDescription(
+//     "Complete all projects and learn as much as possible"
+//   );
+//   proj1Task1.setPriority("Mid");
+//   proj1Task1.taskDates.setDueDate("2024, 01, 31");
+//   proj1.addTask(proj1Task1);
+//   projects.append(proj1);
 
-  manageCurrentProject.setProject(proj1);
+//   manageCurrentProject.setProject(proj1);
 
-  renderProjects(projects);
-  renderTasks(proj1);
-}
+//   renderProjects(projects);
+//   // renderTasks(proj1);
+// }
 
 const createProject = () => {
   let name = "";
@@ -98,9 +98,10 @@ function renderProjects(projects) {
     let projectElement = createProjectElement(projectObject);
     let deleteBtn = projectElement.children.item(3);
 
+    console.log(projectObject.getTasks());
+
     addEventListenerToProjects(projectObject, projectElement);
     projectContainer.appendChild(projectElement);
-    manageCurrentProject.setProject(projectObject);
 
     deleteBtn.addEventListener("click", function (event) {
       removeProject(event, projects);
@@ -111,8 +112,9 @@ function renderProjects(projects) {
 
 function addEventListenerToProjects(projectObject, projectElement) {
   projectElement.addEventListener("click", function () {
-    console.log(manageCurrentProject.getProject());
+    manageCurrentProject.setProject(projectObject);
     renderTasks(projectObject);
+    console.log(projectObject.getTasks().length);
   });
 
   projectElement.addEventListener("dblclick", function () {
@@ -170,5 +172,5 @@ export {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
-  loadDefaultProjects,
+  // loadDefaultProjects,
 };

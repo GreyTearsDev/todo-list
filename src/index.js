@@ -17,7 +17,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 
 (function () {
   createMainLayoutElements();
-  loadDefaultProjects();
+  // loadDefaultProjects();
   const taskBtn = document.querySelector("#btn-new-task");
   const projBtn = document.querySelector("#btn-create-project");
   const modal = document.getElementById("general-modal");
@@ -40,6 +40,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
       manageCurrentProject.setProject(project);
       applyProjectFormInfo(form, project);
       projects.append(project);
+
       closeModal();
       renderProjects(projects);
       renderTasks(manageCurrentProject.getProject());
@@ -74,4 +75,6 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 /*to do
 
 
-remove tasks when the las t project is deleted*/
+Fix bug causing new tasks to be added to ghost projects
+
+*/
