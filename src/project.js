@@ -18,6 +18,53 @@ const manageCurrentProject = (function () {
   return { setProject, getProject };
 })();
 
+function loadDefaultProjects() {
+  const project1 = createProject();
+  const task1Proj1 = createTask();
+  const task2Proj1 = createTask();
+  const task3Proj1 = createTask();
+  project1.setName("Daniela's birthday");
+  project1.setDescription("Plan the best party she's ever had");
+
+  task1Proj1.setTitle("Order a cake");
+  task1Proj1.setDescription("Make sure to order the one with the barries");
+  task1Proj1.setPriority("High");
+  task1Proj1.taskDates.setDueDate("2023-12-28");
+
+  task2Proj1.setTitle("Invite friends and family");
+  task2Proj1.setDescription("Better not call James. Doesn't bring good vibes)");
+  task2Proj1.setPriority("Low");
+
+  task3Proj1.setTitle("Buy the present");
+  task3Proj1.setDescription("Call Rafaela for help");
+  task3Proj1.setPriority("High");
+  task3Proj1.taskDates.setDueDate("2023-12-22");
+  task3Proj1.switchTaskStatus();
+
+  project1.addTask(task1Proj1);
+  project1.addTask(task2Proj1);
+  project1.addTask(task3Proj1);
+
+  projects.append(project1);
+
+  const project2 = createProject();
+  const task1Proj2 = createTask();
+
+  project2.setName("Finish JS course");
+  project2.setDescription(
+    "Follow TOP's curriculum to learn as much as possible"
+  );
+
+  task1Proj2.setTitle("Finish toDo App");
+  task1Proj2.switchTaskStatus();
+  project2.addTask(task1Proj2);
+
+  projects.append(project2);
+
+  manageCurrentProject.setProject(project1);
+  renderProjects(projects);
+}
+
 const createProject = () => {
   let name = "";
   let description = "";
@@ -155,4 +202,5 @@ export {
   applyProjectFormInfo,
   manageCurrentProject,
   projects,
+  loadDefaultProjects,
 };

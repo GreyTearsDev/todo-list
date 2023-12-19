@@ -144,7 +144,7 @@ const createHeaderElement = () => {
   const appName = document.createElement("h2");
   const tip = document.createElement("p");
 
-  tip.textContent = "Double click a project or a task to edit it!";
+  tip.textContent = "Double click on a project or task to edit it!";
   appName.textContent = "ToBeDone";
   header.appendChild(appName);
   header.appendChild(tip);
@@ -190,9 +190,9 @@ const newProjectForm = () => {
   submit.textContent = "Create";
   submit.id = "btn-submit-form";
   projName.placeholder = "Project name: ";
-  projName.maxLength = 30;
+  projName.maxLength = 40;
   projDescription.placeholder = "Description: ";
-  projDescription.maxLength = 70;
+  projDescription.maxLength = 120;
 
   body.appendChild(projName);
   body.appendChild(projDescription);
@@ -216,8 +216,8 @@ const editProjectForm = (project) => {
   cancelBtn.id = "btn-cancel-editProjForm";
   updateBtn.textContent = "Update";
   updateBtn.id = "btn-update-editProjForm";
-  projName.maxLength = 30;
-  projDescription.maxLength = 75;
+  projName.maxLength = 40;
+  projDescription.maxLength = 120;
 
   if (project.getName() == NO_NAME) {
     projName.placeholder = project.getName();
@@ -260,8 +260,8 @@ const newTaskForm = () => {
   taskTitle.placeholder = "Title: ";
   taskDescription.placeholder = "Description: ";
   priorityInfo.textContent = "Priority";
-  taskTitle.maxLength = 35;
-  taskDescription.maxLength = 75;
+  taskTitle.maxLength = 40;
+  taskDescription.maxLength = 120;
   body.classList.add("form");
 
   body.appendChild(taskTitle);
@@ -296,8 +296,8 @@ const editTaskForm = (task) => {
   date.id = "date-field";
   updateBtn.textContent = "Update";
   updateBtn.id = "btn-update-editTaskForm";
-  taskTitle.maxLength = 35;
-  taskDescription.maxLength = 75;
+  taskTitle.maxLength = 40;
+  taskDescription.maxLength = 120;
   priorityInfo.textContent = "Priority";
   console.log(task);
   prioritySelector.value = task.getPriority();
