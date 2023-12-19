@@ -133,14 +133,12 @@ button {
   align-items: center;
   font-weight: bold;
   color: var(--main-color);
-  transition-property: transform;
+  transition-property: transform, color, background-color;
   transition-duration: 200ms;
 }
 
 button:hover {
   cursor: pointer;
-  transform: scale(103%);
-  box-shadow: var(--shadow-elevation-medium);
 }
 
 button:active {
@@ -152,6 +150,13 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+header > p {
+  position: absolute;
+  top: 53px;
+  font-size: 0.8em;
 }
 
 /*========SIDEBAR=========*/
@@ -191,7 +196,7 @@ main {
   gap: 4%;
   box-shadow: var(--shadow-elevation-low);
   transition-property: transform;
-  transition-duration: 100ms;
+  transition-duration: 50ms;
 }
 
 .project:hover {
@@ -227,14 +232,13 @@ main {
 .btn-delete-task,
 #btn-completed {
   width: 35%;
-  transition: transform, background-color;
   transition-duration: 100ms;
 }
 
 #btn-delete-project:hover,
 .btn-delete-task:hover {
+  color: var(--project-border-color);
   background-color: var(--priority-high);
-  transform: scale(104%);
 }
 
 /*=======TASK CONTAINER========*/
@@ -243,7 +247,7 @@ main {
   display: grid;
   gap: 2vh 1vw;
   grid-template-columns: repeat(auto-fit, minmax(200px, 24%));
-  grid-template-rows: repeat(auto-fil, 250px);
+  grid-template-rows: repeat(auto-fil, 240px);
   padding: 2vh 0vw;
 }
 
@@ -259,22 +263,27 @@ main {
   align-items: center;
   box-shadow: var(--shadow-elevation-low);
   transition-property: transform;
+  transition-duration: 50ms;
+}
+
+.body-task:hover {
+  transform: scale(104%);
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+#btn-completed,
+.btn-delete-task {
+  width: 20%;
+  transition-property: color;
   transition-duration: 100ms;
 }
-
-.btn-delete-task,
 #btn-completed {
-  width: 20%;
-}
-
-.btn-delete-task:hover,
-#btn-completed {
-  border: 1px solid var(--project-border-color);
+  margin: 4px 0;
 }
 
 #btn-completed:hover {
   background-color: var(--priority-low);
-  transform: scale(104%);
+  color: var(--project-border-color);
 }
 
 .priority-low {

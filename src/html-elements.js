@@ -41,7 +41,6 @@ const createTaskElement = (task) => {
   body.appendChild(description);
   body.appendChild(dueDateContainer);
   body.appendChild(btnDone);
-
   body.appendChild(btnDelete);
 
   return body;
@@ -139,9 +138,12 @@ const createModal = () => {
 const createHeaderElement = () => {
   const header = document.createElement("header");
   const appName = document.createElement("h2");
+  const tip = document.createElement("p");
 
+  tip.textContent = "Double click a project or a task to edit it!";
   appName.textContent = "ToBeDone";
   header.appendChild(appName);
+  header.appendChild(tip);
 
   return header;
 };
