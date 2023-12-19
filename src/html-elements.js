@@ -8,6 +8,18 @@ const createTaskElement = (task) => {
   const dueDateInfo = document.createElement("p");
   const priority = document.createElement("h5");
 
+  switch (task.getPriority()) {
+    case "Low":
+      body.classList.add("priority-low", "body-task");
+      break;
+    case "Mid":
+      body.classList.add("priority-mid", "body-task");
+      break;
+    case "High":
+      body.classList.add("priority-high", "body-task");
+      break;
+  }
+
   if (task.taskDates.getDueDate() == "") {
     dueDateInfo.textContent = "No due date!";
   } else {
@@ -23,7 +35,6 @@ const createTaskElement = (task) => {
   btnDone.textContent = "Completed";
   btnDone.id = "btn-completed";
 
-  body.className = "body-task";
   body.appendChild(title);
   body.appendChild(priority);
   body.appendChild(description);
@@ -277,6 +288,7 @@ const editTaskForm = (task) => {
   taskTitle.maxLength = 35;
   taskDescription.maxLength = 75;
   priorityInfo.textContent = "Priority";
+  console.log(task);
   prioritySelector.value = task.getPriority();
 
   if (task.taskDates.getDueDate() != "") {

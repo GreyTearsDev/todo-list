@@ -92,6 +92,7 @@ function renderTasks(project) {
   // Creating a task element for each task object stored in the project
   for (let task of project.getTasks()) {
     let newTask = createTaskElement(task);
+
     addEventListenerToTasks(newTask, project);
     taskContainer.appendChild(newTask);
   }
@@ -115,7 +116,7 @@ function editTaskInfo(event, project) {
   let taskContainer = event.target.parentNode.parentNode;
   let currentTask = event.target.parentNode;
   let index = getTaskIndex(currentTask, taskContainer);
-  let task = getTaskObject(project, index);
+  let task = getTaskObject(project, index - 1);
   const form = editTaskForm(task);
 
   openModal(form);
