@@ -236,7 +236,10 @@ main {
 /*=======TASK CONTAINER========*/
 
 #task-container {
-  display: flex;
+  display: grid;
+  justify-content: space-around;
+
+  grid-template-columns: repeat(3, 1fr);
   padding: 2vh 0vw;
 }
 

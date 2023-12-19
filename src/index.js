@@ -82,3 +82,7 @@ import { openModal, closeModal, displayModalMessage } from "./util";
     cancelBtn.addEventListener("click", closeModal);
   });
 })();
+
+/*To do
+
+*/

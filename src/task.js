@@ -64,7 +64,7 @@ const getTaskIndex = (task, container) => {
 
 // Function to get the task object from the project using its index
 const getTaskObject = (project, index) => {
-  return project.getTasks()[index - 1];
+  return project.getTasks()[index];
 };
 
 // Function to remove a task from the project
@@ -73,6 +73,7 @@ const removeTask = (event, project) => {
   let currentTask = event.target.parentNode;
   let taskIndex = getTaskIndex(currentTask, taskContainer);
   let taskObject = getTaskObject(project, taskIndex);
+
   project.removeTask(taskObject);
 };
 
