@@ -171,10 +171,12 @@ aside {
 }
 
 main {
-  background-color: var(--accent-color);
+  background-color: var(--main-color);
   display: flex;
   flex-direction: column;
   padding: 2vh 2vw;
+  border-radius: 20px 0 0 0;
+  box-shadow: inset 2px 4px 10px rgba(0, 0, 0, 0.254);
 }
 
 /*======PROJECT CONTAINER========*/
