@@ -32,14 +32,16 @@ const createTaskElement = (task) => {
   description.textContent = task.getDescription();
   btnDelete.textContent = "Delete";
   btnDelete.className = "btn-delete-task";
-  btnDone.textContent = "Completed";
+  btnDone.textContent = "Done";
   btnDone.id = "btn-completed";
+  dueDateInfo.id = "date-info";
 
   body.appendChild(title);
   body.appendChild(priority);
   body.appendChild(description);
-  body.appendChild(btnDone);
   body.appendChild(dueDateContainer);
+  body.appendChild(btnDone);
+
   body.appendChild(btnDelete);
 
   return body;

@@ -210,7 +210,8 @@ main {
   color: var(--project-border-color);
 }
 
-.project > p {
+.project > p,
+.body-task > p {
   text-align: center;
   margin: 8px 0;
 }
@@ -223,7 +224,8 @@ main {
 }
 
 #btn-delete-project,
-.btn-delete-task {
+.btn-delete-task,
+#btn-completed {
   width: 35%;
   transition: transform, background-color;
   transition-duration: 100ms;
@@ -260,8 +262,19 @@ main {
   transition-duration: 100ms;
 }
 
-.btn-delete-task {
+.btn-delete-task,
+#btn-completed {
   width: 20%;
+}
+
+.btn-delete-task:hover,
+#btn-completed {
+  border: 1px solid var(--project-border-color);
+}
+
+#btn-completed:hover {
+  background-color: var(--priority-low);
+  transform: scale(104%);
 }
 
 .priority-low {
