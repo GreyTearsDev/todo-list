@@ -15,7 +15,11 @@ const manageCurrentProject = (function () {
     return currentProject;
   }
 
-  return { setProject, getProject };
+  function getIndex() {
+    return projects.find(currentProject);
+  }
+
+  return { setProject, getProject, getIndex };
 })();
 
 function loadDefaultProjects() {
@@ -23,6 +27,8 @@ function loadDefaultProjects() {
   const task1Proj1 = createTask();
   const task2Proj1 = createTask();
   const task3Proj1 = createTask();
+  manageCurrentProject.setProject(project1);
+
   project1.setName("Daniela's birthday");
   project1.setDescription("Plan the best party she's ever had");
 
@@ -32,7 +38,7 @@ function loadDefaultProjects() {
   task1Proj1.taskDates.setDueDate("2023-12-28");
 
   task2Proj1.setTitle("Invite friends and family");
-  task2Proj1.setDescription("Better not call James. Doesn't bring good vibes)");
+  task2Proj1.setDescription("Better not call James (doesn't bring good vibes)");
   task2Proj1.setPriority("Low");
 
   task3Proj1.setTitle("Buy the present");
@@ -61,8 +67,8 @@ function loadDefaultProjects() {
 
   projects.append(project2);
 
-  manageCurrentProject.setProject(project1);
   renderProjects(projects);
+  renderTasks(project1);
 }
 
 const createProject = () => {
@@ -126,25 +132,30 @@ function renderProjects(projects) {
     let projectElement = createProjectElement(projectObject);
     let deleteBtn = projectElement.children.item(3);
 
+    renderTasks(projectObject);
     addEventListenerToProjects(projectObject, projectElement);
     projectContainer.appendChild(projectElement);
-
-    deleteBtn.addEventListener("click", function (event) {
-      removeProject(event, projects);
-      renderTasks(projects.getElement());
-    });
+    deleteBtn.addEventListener("click", removeProjects);
   }
 }
 
+function removeProjects(event) {
+  removeProject(event, projects);
+  renderTasks(projects.getElement());
+}
+
 function addEventListenerToProjects(projectObject, projectElement) {
-  projectElement.addEventListener("click", function () {
+  projectElement.addEventListener("click", selectProject);
+
+  projectElement.addEventListener("dblclick", editProjectForm);
+
+  function editProjectForm() {
+    editProjectInfo(projectObject);
+  }
+  function selectProject() {
     manageCurrentProject.setProject(projectObject);
     renderTasks(projectObject);
-  });
-
-  projectElement.addEventListener("dblclick", function () {
-    editProjectInfo(projectObject);
-  });
+  }
 }
 
 function editProjectInfo(projectObject) {
@@ -186,11 +197,13 @@ function removeProject(event, projects) {
     activeProjectElement
   );
 
+  let ind = activeProjectsIndex;
   // Moving the projects list to the clicked project index and removing the project
   projects.moveTo(activeProjectsIndex);
   projects.remove(projects.getElement());
   // Moving the projects list to the clicked project index and removing the project
   projectsContainer.removeChild(activeProjectElement);
+
   // Resetting the current project and rendering projects
   manageCurrentProject.setProject(undefined);
   renderProjects(projects);

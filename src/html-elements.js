@@ -299,7 +299,6 @@ const editTaskForm = (task) => {
   taskTitle.maxLength = 40;
   taskDescription.maxLength = 120;
   priorityInfo.textContent = "Priority";
-  console.log(task);
   prioritySelector.value = task.getPriority();
   body.classList.add("form");
 

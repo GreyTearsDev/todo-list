@@ -1,6 +1,6 @@
 import { dateManager } from "./dates";
 import { createTaskElement, editTaskForm } from "./html-elements";
-import { manageCurrentProject } from "./project";
+import { manageCurrentProject, projects } from "./project";
 import { openModal, closeModal } from "./util";
 
 const createTask = () => {
@@ -75,6 +75,7 @@ const removeTask = (event, project) => {
   let taskObject = getTaskObject(project, taskIndex);
 
   project.removeTask(taskObject);
+  manageCurrentProject.setProject(undefined);
 };
 
 // Function to render tasks for a given project
@@ -82,13 +83,15 @@ function renderTasks(project) {
   const taskContainer = document.getElementById("task-container");
   let [...nodes] = taskContainer.childNodes; // Getting a copy of the child nodes in the task container
 
-  if (project === undefined) return;
-
   // Cleaning the container before rendering
   for (let i = 0; i < nodes.length; ++i) {
     taskContainer.removeChild(nodes[i]);
   }
-
+  if (projects.toString().length == 0) {
+    return;
+  } else {
+    manageCurrentProject.setProject(project);
+  }
   // Creating a task element for each task object stored in the project
   for (let task of project.getTasks()) {
     let newTask = createTaskElement(task);
@@ -114,17 +117,18 @@ function addEventListenerToTasks(task, project) {
     removeTask(event, project);
     renderTasks(project);
   });
-  task.addEventListener("dblclick", function (event) {
+  task.addEventListener("dblclick", editTask);
+  function editTask(event) {
     editTaskInfo(event, project);
-  });
+  }
 }
 
 // Function to edit task information using a modal form
 function editTaskInfo(event, project) {
-  let taskContainer = event.target.parentNode.parentNode;
-  let currentTask = event.target.parentNode;
+  let taskContainer = event.target.parentNode;
+  let currentTask = event.target;
   let index = getTaskIndex(currentTask, taskContainer);
-  let task = getTaskObject(project, index - 1);
+  let task = getTaskObject(project, index);
   const form = editTaskForm(task);
 
   openModal(form);
@@ -132,12 +136,14 @@ function editTaskInfo(event, project) {
   const updateBtn = document.querySelector("#btn-update-editTaskForm");
 
   cancelBtn.addEventListener("click", closeModal);
-  updateBtn.addEventListener("click", function () {
+  updateBtn.addEventListener("click", updateTask);
+
+  function updateTask() {
     project.removeTask(task);
     applyTaskFormInfo(form, task, project);
     closeModal();
     renderTasks(project);
-  });
+  }
 }
 
 // Function to apply form information to a task

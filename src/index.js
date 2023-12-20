@@ -83,5 +83,5 @@ import { openModal, closeModal, displayModalMessage } from "./util";
 })();
 
 /*To do
-
+find out why the content on the task container is not getting correctly updated when a project is deleted
 */
