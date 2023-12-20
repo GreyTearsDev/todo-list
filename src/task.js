@@ -75,7 +75,6 @@ const removeTask = (event, project) => {
   let taskObject = getTaskObject(project, taskIndex);
 
   project.removeTask(taskObject);
-  manageCurrentProject.setProject(undefined);
 };
 
 // Function to render tasks for a given project
@@ -88,6 +87,7 @@ function renderTasks(project) {
     taskContainer.removeChild(nodes[i]);
   }
   if (projects.toString().length == 0) {
+    manageCurrentProject.setProject(undefined);
     return;
   } else {
     manageCurrentProject.setProject(project);

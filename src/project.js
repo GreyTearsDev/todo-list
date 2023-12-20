@@ -196,7 +196,7 @@ function removeProject(event, projects) {
     projectsContainer.children,
     activeProjectElement
   );
-
+  console.log(activeProjectsIndex);
   let ind = activeProjectsIndex;
   // Moving the projects list to the clicked project index and removing the project
   projects.moveTo(activeProjectsIndex);
@@ -205,7 +205,9 @@ function removeProject(event, projects) {
   projectsContainer.removeChild(activeProjectElement);
 
   // Resetting the current project and rendering projects
-  manageCurrentProject.setProject(undefined);
+  if (projects.toString().length == 0) {
+    manageCurrentProject.setProject(undefined);
+  }
   renderProjects(projects);
 }
 
