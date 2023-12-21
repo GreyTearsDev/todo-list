@@ -77,28 +77,35 @@ const removeTask = (event, project) => {
   project.removeTask(taskObject);
 };
 
-// Function to render tasks for a given project
-function renderTasks(project) {
-  const taskContainer = document.getElementById("task-container");
+function clearTaskContainer(taskContainer) {
   let [...nodes] = taskContainer.childNodes; // Getting a copy of the child nodes in the task container
 
   // Cleaning the container before rendering
   for (let i = 0; i < nodes.length; ++i) {
     taskContainer.removeChild(nodes[i]);
   }
-  if (projects.toString().length == 0) {
-    manageCurrentProject.setProject(undefined);
-    return;
-  } else {
-    manageCurrentProject.setProject(project);
-  }
+}
+
+function appendTaskToContainer(project, taskContainer) {
   // Creating a task element for each task object stored in the project
   for (let task of project.getTasks()) {
     let newTask = createTaskElement(task);
-
     addEventListenerToTasks(newTask, project);
     taskContainer.appendChild(newTask);
   }
+}
+
+// Function to render tasks for a given project
+function renderTasks(project) {
+  const taskContainer = document.getElementById("task-container");
+
+  clearTaskContainer(taskContainer);
+  if (projects.toString().length == 0) {
+    manageCurrentProject.setProject(undefined);
+    return;
+  }
+  // Creating a task element for each task object stored in the project
+  appendTaskToContainer(project, taskContainer);
 }
 
 // Function to add event listeners to task elements
@@ -165,4 +172,4 @@ function applyTaskFormInfo(form, task, project) {
   project.addTask(task);
 }
 
-export { createTask, renderTasks, applyTaskFormInfo };
+export { createTask, renderTasks, applyTaskFormInfo, clearTaskContainer };

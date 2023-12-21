@@ -2,7 +2,7 @@ import { createList } from "./storage";
 import { dateManager } from "./dates";
 import { openModal, closeModal } from "./util";
 import { createProjectElement, editProjectForm } from "./html-elements";
-import { renderTasks, createTask } from "./task";
+import { renderTasks, createTask, clearTaskContainer } from "./task";
 
 const projects = createList();
 const manageCurrentProject = (function () {
@@ -19,56 +19,23 @@ const manageCurrentProject = (function () {
     return projects.find(currentProject);
   }
 
-  return { setProject, getProject, getIndex };
+  function renderCurrentTasks() {
+    renderTasks(currentProject);
+  }
+
+  return { setProject, getProject, getIndex, renderCurrentTasks };
 })();
 
 function loadDefaultProjects() {
   const project1 = createProject();
-  const task1Proj1 = createTask();
-  const task2Proj1 = createTask();
-  const task3Proj1 = createTask();
   manageCurrentProject.setProject(project1);
 
-  project1.setName("Daniela's birthday");
+  project1.setName("Elsa's birthday");
   project1.setDescription("Plan the best party she's ever had");
-
-  task1Proj1.setTitle("Order a cake");
-  task1Proj1.setDescription("Make sure to order the one with the barries");
-  task1Proj1.setPriority("High");
-  task1Proj1.taskDates.setDueDate("2023-12-28");
-
-  task2Proj1.setTitle("Invite friends and family");
-  task2Proj1.setDescription("Better not call James (doesn't bring good vibes)");
-  task2Proj1.setPriority("Low");
-
-  task3Proj1.setTitle("Buy the present");
-  task3Proj1.setDescription("Call Rafaela for help");
-  task3Proj1.setPriority("High");
-  task3Proj1.taskDates.setDueDate("2023-12-22");
-  task3Proj1.switchTaskStatus();
-
-  project1.addTask(task1Proj1);
-  project1.addTask(task2Proj1);
-  project1.addTask(task3Proj1);
 
   projects.append(project1);
 
-  const project2 = createProject();
-  const task1Proj2 = createTask();
-
-  project2.setName("Finish JS course");
-  project2.setDescription(
-    "Follow TOP's curriculum to learn as much as possible"
-  );
-
-  task1Proj2.setTitle("Finish toDo App");
-  task1Proj2.switchTaskStatus();
-  project2.addTask(task1Proj2);
-
-  projects.append(project2);
-
   renderProjects(projects);
-  renderTasks(project1);
 }
 
 const createProject = () => {
@@ -132,16 +99,17 @@ function renderProjects(projects) {
     let projectElement = createProjectElement(projectObject);
     let deleteBtn = projectElement.children.item(3);
 
-    renderTasks(projectObject);
     addEventListenerToProjects(projectObject, projectElement);
     projectContainer.appendChild(projectElement);
     deleteBtn.addEventListener("click", removeProjects);
+    // manageCurrentProject.renderCurrentTasks();
   }
 }
 
 function removeProjects(event) {
   removeProject(event, projects);
-  renderTasks(projects.getElement());
+  projects.moveTo(projects.currPos() - 1);
+  // renderTasks(projects.getElement());
 }
 
 function addEventListenerToProjects(projectObject, projectElement) {
@@ -155,6 +123,8 @@ function addEventListenerToProjects(projectObject, projectElement) {
   function selectProject() {
     manageCurrentProject.setProject(projectObject);
     renderTasks(projectObject);
+    // manageCurrentProject.renderCurrentTasks();
+    // renderTasks(manageCurrentProject.getProject());
   }
 }
 
@@ -196,19 +166,14 @@ function removeProject(event, projects) {
     projectsContainer.children,
     activeProjectElement
   );
-  console.log(activeProjectsIndex);
-  let ind = activeProjectsIndex;
-  // Moving the projects list to the clicked project index and removing the project
+
   projects.moveTo(activeProjectsIndex);
   projects.remove(projects.getElement());
-  // Moving the projects list to the clicked project index and removing the project
   projectsContainer.removeChild(activeProjectElement);
 
-  // Resetting the current project and rendering projects
   if (projects.toString().length == 0) {
     manageCurrentProject.setProject(undefined);
   }
-  renderProjects(projects);
 }
 
 export {
